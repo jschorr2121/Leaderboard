@@ -296,6 +296,7 @@ footer {
 <nav class="tabs">
   <button class="tab-btn active" data-tab="pool">Pool Standings</button>
   <button class="tab-btn" data-tab="tournament">Tournament Leaderboard</button>
+  <button class="tab-btn" data-tab="ownership">Ownership</button>
 </nav>
 
 <div class="error-banner" id="error-banner"></div>
@@ -337,6 +338,21 @@ footer {
         </tr>
       </thead>
       <tbody id="tourney-body"></tbody>
+    </table>
+  </div>
+
+  <div id="ownership-tab" class="tab-content">
+    <table id="ownership-table">
+      <thead>
+        <tr>
+          <th>GOLFER</th>
+          <th class="center">SCORE</th>
+          <th class="center">OWNED</th>
+          <th class="center">% OWNED</th>
+          <th class="hide-mobile">PICKED BY</th>
+        </tr>
+      </thead>
+      <tbody id="ownership-body"></tbody>
     </table>
   </div>
 </div>
@@ -673,13 +689,11 @@ function renderTournamentLeaderboard(allGolfers) {
     prevScore = g.score;
 
     const tr = document.createElement('tr');
-    tr.className = 'tourney-row' + (g.isPicked ? ' picked' : '');
-
-    const pickedBadge = g.isPicked ? '<span class="picked-badge">PICKED</span>' : '';
+    tr.className = 'tourney-row';
 
     tr.innerHTML = `
       <td class="center">${displayPos}</td>
-      <td>${g.name}${pickedBadge}</td>
+      <td>${g.name}</td>
       <td class="center ${scoreClass(g.score)}" style="font-weight:700">${formatScore(g.score)}</td>
       <td class="center">${g.thru}</td>
       <td class="center ${scoreClass(parseScore(g.today))}">${g.today}</td>
@@ -689,6 +703,53 @@ function renderTournamentLeaderboard(allGolfers) {
       <td class="center hide-mobile">${g.rounds[3] || '-'}</td>
     `;
 
+    tbody.appendChild(tr);
+  });
+}
+
+function renderOwnership(normalizedMap) {
+  const ownershipCount = {};
+  const ownershipBy = {};
+  const totalParticipants = PICKS.length;
+
+  PICKS.forEach(p => {
+    p.picks.forEach(golferName => {
+      const key = normalizeName(golferName);
+      if (!ownershipCount[key]) {
+        ownershipCount[key] = 0;
+        ownershipBy[key] = [];
+      }
+      ownershipCount[key]++;
+      ownershipBy[key].push(p.name);
+    });
+  });
+
+  const rows = Object.keys(ownershipCount).map(key => {
+    const golfer = normalizedMap[key];
+    const displayName = golfer ? golfer.name : key;
+    const score = golfer ? golfer.score : null;
+    const count = ownershipCount[key];
+    const pct = Math.round((count / totalParticipants) * 100);
+    const pickedBy = ownershipBy[key].join(', ');
+    return { displayName, score, count, pct, pickedBy };
+  });
+
+  rows.sort((a, b) => b.count - a.count || a.displayName.localeCompare(b.displayName));
+
+  const tbody = document.getElementById('ownership-body');
+  tbody.innerHTML = '';
+
+  rows.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.className = 'tourney-row';
+    const pctBar = `<div style="background:var(--green-dark);height:6px;border-radius:3px;width:${r.pct}%;margin-top:2px"></div>`;
+    tr.innerHTML = `
+      <td style="font-weight:600">${r.displayName}</td>
+      <td class="center ${scoreClass(r.score)}" style="font-weight:700">${formatScore(r.score)}</td>
+      <td class="center">${r.count} / ${totalParticipants}</td>
+      <td class="center">${r.pct}%${pctBar}</td>
+      <td class="hide-mobile" style="font-size:0.8em;color:var(--text-gray)">${r.pickedBy}</td>
+    `;
     tbody.appendChild(tr);
   });
 }
@@ -703,6 +764,7 @@ async function refresh() {
   const standings = calculateStandings(result.normalizedMap);
   renderPoolStandings(standings);
   renderTournamentLeaderboard(result.allGolfers);
+  renderOwnership(result.normalizedMap);
 
   const now = new Date();
   document.getElementById('last-updated').textContent =
