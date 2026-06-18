@@ -663,6 +663,24 @@ function calculateStandings(normalizedMap) {
   return standings;
 }
 
+function getSGRanks(golferName) {
+  const cats = ['total','offTee','approach','aroundGreen','putting'];
+  const allSG = {};
+  cats.forEach(c => { allSG[c] = []; });
+  for (const [name, data] of Object.entries(PLAYER_DATA)) {
+    if (data.sgData) {
+      cats.forEach(c => { allSG[c].push({ name, val: data.sgData[c] }); });
+    }
+  }
+  const ranks = {};
+  cats.forEach(c => {
+    allSG[c].sort((a, b) => b.val - a.val);
+    const idx = allSG[c].findIndex(x => x.name === golferName);
+    ranks[c] = idx >= 0 ? idx + 1 : null;
+  });
+  return ranks;
+}
+
 function openPlayerModal(golferName) {
   const info = PLAYER_DATA[golferName];
   const g = golferMap[golferName];
@@ -685,12 +703,19 @@ function openPlayerModal(golferName) {
   let html = '';
 
   if (info.sgData) {
+    const ranks = getSGRanks(golferName);
+    const sgCard = (val, label, rank) => {
+      const sign = val > 0 ? '+' : '';
+      const rColor = val > 0 ? 'var(--navy)' : 'var(--red)';
+      const rankStr = rank ? `<div style="font-size:0.7em;color:${rColor};font-weight:700;margin-top:2px">(#${rank})</div>` : '';
+      return `<div class="stat-card"><div class="stat-value" style="color:${rColor}">${sign}${val.toFixed(2)}</div>${rankStr}<div class="stat-label">${label}</div></div>`;
+    };
     html += `<div class="modal-section"><h3>Strokes Gained (2025-26 Season)</h3><div class="stat-grid">
-      <div class="stat-card"><div class="stat-value">${info.sgData.total > 0 ? '+' : ''}${info.sgData.total.toFixed(2)}</div><div class="stat-label">Total</div></div>
-      <div class="stat-card"><div class="stat-value">${info.sgData.offTee > 0 ? '+' : ''}${info.sgData.offTee.toFixed(2)}</div><div class="stat-label">Off the Tee</div></div>
-      <div class="stat-card"><div class="stat-value">${info.sgData.approach > 0 ? '+' : ''}${info.sgData.approach.toFixed(2)}</div><div class="stat-label">Approach</div></div>
-      <div class="stat-card"><div class="stat-value">${info.sgData.aroundGreen > 0 ? '+' : ''}${info.sgData.aroundGreen.toFixed(2)}</div><div class="stat-label">Around Green</div></div>
-      <div class="stat-card"><div class="stat-value">${info.sgData.putting > 0 ? '+' : ''}${info.sgData.putting.toFixed(2)}</div><div class="stat-label">Putting</div></div>
+      ${sgCard(info.sgData.total, 'Total', ranks.total)}
+      ${sgCard(info.sgData.offTee, 'Off the Tee', ranks.offTee)}
+      ${sgCard(info.sgData.approach, 'Approach', ranks.approach)}
+      ${sgCard(info.sgData.aroundGreen, 'Around Green', ranks.aroundGreen)}
+      ${sgCard(info.sgData.putting, 'Putting', ranks.putting)}
     </div></div>`;
   }
 
