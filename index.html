@@ -3,59 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>US Open Pool Leaderboard</title>
+<title>The Open Championship Pool</title>
 <style>
 :root {
-  --navy: #003366;
-  --navy-dark: #002244;
-  --navy-mid: #004080;
-  --red: #cc0000;
-  --red-light: #e63946;
+  --navy: #00205B;
+  --navy-dark: #001845;
+  --navy-light: #1a3a6e;
+  --burgundy: #8B0000;
+  --burgundy-light: #a52a2a;
+  --gold: #C5A55A;
+  --gold-light: #d4b96e;
+  --gold-dim: #9e854a;
+  --cream: #F5F0E8;
+  --cream-dark: #E8DFD0;
+  --parchment: #FDF8F0;
   --white: #ffffff;
-  --cream: #f7f7f2;
-  --sand: #e8e0d0;
   --text-dark: #1a1a1a;
   --text-gray: #666;
-  --blue-light: #e8f0fe;
-  --gold: #b8860b;
-  --score-red: #c0392b;
+  --text-muted: #888;
+  --green: #2e7d32;
+  --red: #c62828;
+  --score-green: #1b5e20;
+  --score-red: #b71c1c;
+  --border: #d5cfc5;
+  --shadow: rgba(0,32,91,0.15);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
   background: var(--cream);
   color: var(--text-dark);
   min-height: 100vh;
 }
 
 header {
-  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-mid) 100%);
-  padding: 20px 16px;
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 40%, var(--navy-light) 100%);
+  padding: 24px 16px 18px;
   text-align: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 4px solid var(--red);
+  box-shadow: 0 3px 16px rgba(0,0,0,0.35);
+  border-bottom: 3px solid var(--gold);
+}
+
+header .header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+header .title-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 4px;
 }
 
 header h1 {
   color: var(--white);
-  font-size: 1.8em;
-  font-weight: 800;
-  letter-spacing: 2px;
+  font-size: 1.5em;
+  font-weight: 700;
+  letter-spacing: 3px;
   text-transform: uppercase;
 }
 
-header h1 .us { color: var(--red-light); }
+header h1 .the-open {
+  color: var(--gold);
+  font-size: 1.2em;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+header .claret-jug {
+  font-size: 1.6em;
+  filter: grayscale(20%);
+}
 
 header .subtitle {
-  color: rgba(255,255,255,0.8);
-  font-size: 0.9em;
-  margin-top: 4px;
-  font-style: italic;
+  color: var(--gold-light);
+  font-size: 0.82em;
+  margin-top: 2px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+header .status-line {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.75em;
+  margin-top: 8px;
+}
+
+header .status-line .live-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  background: #4caf50;
+  border-radius: 50%;
+  margin-right: 4px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
 .tabs {
@@ -63,32 +113,39 @@ header .subtitle {
   justify-content: center;
   gap: 0;
   background: var(--navy-dark);
-  border-bottom: 3px solid var(--red);
+  border-bottom: 2px solid var(--burgundy);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .tab-btn {
   background: none;
   border: none;
-  color: rgba(255,255,255,0.65);
-  padding: 12px 24px;
+  color: rgba(255,255,255,0.55);
+  padding: 11px 22px;
   font-family: inherit;
-  font-size: 0.9em;
+  font-size: 0.85em;
   cursor: pointer;
   transition: all 0.2s;
   border-bottom: 3px solid transparent;
-  margin-bottom: -3px;
+  margin-bottom: -2px;
   font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-.tab-btn:hover { color: #fff; background: rgba(255,255,255,0.08); }
-.tab-btn.active { color: var(--white); border-bottom-color: var(--red); }
+.tab-btn:hover { color: var(--gold-light); background: rgba(255,255,255,0.06); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
 
-.container { max-width: 960px; margin: 0 auto; padding: 16px; }
+.container { max-width: 980px; margin: 0 auto; padding: 16px; }
 
 .last-updated {
   text-align: center;
-  color: var(--text-gray);
-  font-size: 0.8em;
+  color: var(--text-muted);
+  font-size: 0.78em;
   padding: 8px;
   font-style: italic;
 }
@@ -96,14 +153,21 @@ header .subtitle {
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
+.hint-text {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8em;
+  padding: 6px 0 10px;
+  font-style: italic;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
   background: var(--white);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-  margin-bottom: 20px;
+  box-shadow: 0 2px 12px var(--shadow);
 }
 
 thead th {
@@ -111,722 +175,1683 @@ thead th {
   color: var(--white);
   padding: 10px 8px;
   font-size: 0.78em;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-weight: 700;
   text-align: left;
   white-space: nowrap;
 }
 
 thead th.center { text-align: center; }
+thead th.right { text-align: right; }
+
+tbody tr {
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+tbody tr:hover { background: #f5f2ec; }
+tbody tr:nth-child(even) { background: #faf8f5; }
+tbody tr:nth-child(even):hover { background: #f0ede6; }
 
 tbody td {
   padding: 10px 8px;
-  border-bottom: 1px solid #eee;
-  font-size: 0.9em;
+  font-size: 0.88em;
+  white-space: nowrap;
 }
 
-tbody td.center { text-align: center; }
+td.center { text-align: center; }
+td.right { text-align: right; }
 
-/* Pool standings */
-.pool-row { cursor: pointer; transition: background 0.15s; }
-.pool-row:hover { background: var(--blue-light); }
-.pool-row td:first-child { font-weight: 700; color: var(--navy); text-align: center; width: 50px; }
-.pool-row .name { font-weight: 700; color: var(--navy); font-size: 0.95em; }
-.pool-row .score { font-weight: 700; text-align: center; }
+.rank-cell {
+  font-weight: 700;
+  color: var(--navy);
+  width: 36px;
+  text-align: center;
+}
 
-.score-negative { color: var(--score-red); }
-.score-positive { color: var(--text-dark); }
-.score-even { color: var(--text-gray); }
+.name-cell {
+  font-weight: 600;
+  color: var(--navy-dark);
+}
 
-.dq-row { opacity: 0.45; }
-.dq-row .score { color: var(--red); font-weight: 700; }
+.score-cell {
+  font-weight: 700;
+  font-size: 0.95em;
+}
 
-.detail-row { display: none; }
-.detail-row.open { display: table-row; }
-.detail-row td { padding: 0; background: var(--cream); border-bottom: 2px solid var(--navy); }
+.score-under { color: var(--score-green); }
+.score-over { color: var(--score-red); }
+.score-even { color: var(--text-dark); }
 
-.picks-table { width: 100%; border-collapse: collapse; box-shadow: none; border-radius: 0; margin: 0; }
-.picks-table thead th { background: var(--navy-mid); font-size: 0.7em; padding: 6px 8px; }
-.picks-table tbody td { padding: 8px; font-size: 0.85em; border-bottom: 1px solid #ddd; }
-.picks-table .counting { background: rgba(0,51,102,0.06); }
-.picks-table .not-counting { opacity: 0.4; }
-.picks-table .cut-indicator { color: var(--red); font-weight: 700; font-size: 0.8em; }
-.picks-table .counting-badge {
-  display: inline-block;
-  background: var(--navy);
-  color: var(--white);
-  font-size: 0.65em;
+.dq-row { opacity: 0.55; }
+.dq-badge {
+  background: var(--burgundy);
+  color: white;
+  font-size: 0.7em;
   padding: 2px 6px;
   border-radius: 3px;
   font-weight: 700;
+  margin-left: 6px;
 }
-
-.golfer-name-link {
-  color: var(--navy);
-  cursor: pointer;
-  text-decoration: underline;
-  text-decoration-color: rgba(0,51,102,0.3);
-}
-.golfer-name-link:hover { text-decoration-color: var(--navy); }
 
 .expand-icon {
   display: inline-block;
   transition: transform 0.2s;
-  margin-right: 6px;
   font-size: 0.7em;
+  margin-right: 4px;
+  color: var(--text-muted);
 }
-.pool-row.expanded .expand-icon { transform: rotate(90deg); }
 
-.rank-1 { color: #b8860b; }
-.rank-2 { color: #888; }
-.rank-3 { color: #cd7f32; }
+.expand-icon.open { transform: rotate(90deg); }
 
-/* Tournament leaderboard */
-.tourney-row td { font-size: 0.88em; }
-.tourney-row td:first-child { text-align: center; font-weight: 600; }
-.tourney-row .golfer-name-link { font-weight: 600; }
+.detail-row { display: none; cursor: default; }
+.detail-row.open { display: table-row; }
+.detail-row:hover { background: var(--cream) !important; }
 
-/* Player modal */
+.detail-cell {
+  padding: 12px 16px !important;
+  background: var(--cream);
+  border-bottom: 2px solid var(--gold-dim);
+}
+
+.picks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 8px;
+}
+
+.pick-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--white);
+  border-radius: 6px;
+  border-left: 3px solid var(--navy);
+  font-size: 0.85em;
+}
+
+.pick-card.counting { border-left-color: var(--green); background: #f1f8e9; }
+.pick-card.cut { border-left-color: var(--burgundy); opacity: 0.6; }
+
+.pick-card .pick-name {
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  text-decoration: none;
+}
+.pick-card .pick-name:hover { text-decoration: underline; color: var(--burgundy); }
+
+.pick-card .pick-tier {
+  font-size: 0.75em;
+  color: var(--text-muted);
+}
+
+.pick-card .pick-score {
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+.pick-card .pick-status {
+  font-size: 0.72em;
+  color: var(--text-muted);
+}
+
+.pick-card .counting-badge {
+  font-size: 0.65em;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--green);
+  color: white;
+  font-weight: 600;
+}
+
+.pick-card .cut-badge {
+  font-size: 0.65em;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--burgundy);
+  color: white;
+  font-weight: 600;
+}
+
+/* Leaderboard tab */
+.leaderboard-table .pos-cell { width: 50px; text-align: center; font-weight: 700; color: var(--navy); }
+.leaderboard-table .thru-cell { color: var(--text-muted); font-size: 0.85em; }
+
+/* Ownership tab */
+.ownership-table .pct-bar {
+  display: inline-block;
+  height: 6px;
+  background: var(--navy);
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.picked-by-list {
+  font-size: 0.78em;
+  color: var(--text-muted);
+  max-width: 400px;
+  white-space: normal;
+}
+
+/* SG Stats tab */
+.sg-tab-content {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.sg-link-btn {
+  display: inline-block;
+  background: var(--navy);
+  color: var(--gold);
+  padding: 12px 32px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1em;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  transition: background 0.2s;
+}
+
+.sg-link-btn:hover { background: var(--navy-light); }
+
+.sg-iframe-container {
+  width: 100%;
+  height: 700px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 12px;
+  background: white;
+}
+
+.sg-iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.sg-fallback {
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Modal */
 .modal-overlay {
   display: none;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,20,50,0.7);
   z-index: 1000;
   justify-content: center;
   align-items: flex-start;
   padding: 40px 16px;
   overflow-y: auto;
 }
+
 .modal-overlay.open { display: flex; }
 
-.modal {
-  background: var(--white);
+.modal-card {
+  background: var(--parchment);
   border-radius: 12px;
-  max-width: 600px;
+  max-width: 620px;
   width: 100%;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
   overflow: hidden;
-  animation: modalIn 0.25s ease-out;
+  animation: modalIn 0.25s ease;
 }
 
 @keyframes modalIn {
-  from { opacity: 0; transform: translateY(-20px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .modal-header {
   background: linear-gradient(135deg, var(--navy-dark), var(--navy));
-  color: var(--white);
-  padding: 20px;
+  color: white;
+  padding: 20px 24px;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-.modal-header h2 { font-size: 1.4em; font-weight: 800; }
-.modal-header .player-meta { font-size: 0.85em; opacity: 0.8; margin-top: 4px; }
-.modal-header .player-score {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2em;
+.modal-header-left { flex: 1; padding-right: 50px; }
+
+.modal-header h2 {
+  font-size: 1.4em;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.modal-header .modal-country {
+  font-size: 0.9em;
+  color: var(--gold-light);
+  font-weight: 400;
+}
+
+.modal-header .modal-score {
+  font-size: 1.5em;
   font-weight: 800;
+  white-space: nowrap;
+  padding-top: 2px;
 }
 
 .modal-close {
   position: absolute;
-  top: 12px;
-  right: 16px;
+  top: 8px;
+  right: 8px;
   background: none;
   border: none;
-  color: var(--white);
-  font-size: 1.5em;
+  color: rgba(255,255,255,0.7);
+  font-size: 1.6em;
   cursor: pointer;
-  opacity: 0.7;
+  padding: 4px 8px;
   line-height: 1;
+  z-index: 10;
 }
-.modal-close:hover { opacity: 1; }
 
-.modal-body { padding: 20px; }
+.modal-close:hover { color: white; }
+
+.modal-body { padding: 20px 24px; }
 
 .modal-section {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .modal-section h3 {
   font-size: 0.85em;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   color: var(--navy);
-  border-bottom: 2px solid var(--red);
-  padding-bottom: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--gold);
   font-weight: 700;
 }
 
-.stat-grid {
+.modal-bio {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
+  font-size: 0.88em;
 }
 
-.stat-card {
-  background: var(--blue-light);
-  border-radius: 8px;
-  padding: 10px;
+.modal-bio .bio-label { color: var(--text-muted); font-size: 0.85em; }
+.modal-bio .bio-value { font-weight: 600; }
+
+/* SG Stats in modal */
+.sg-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
   text-align: center;
 }
 
-.stat-card .stat-value {
-  font-size: 1.3em;
-  font-weight: 800;
-  color: var(--navy);
+.sg-item {
+  padding: 8px 4px;
+  background: var(--white);
+  border-radius: 6px;
+  border: 1px solid var(--border);
 }
 
-.stat-card .stat-label {
-  font-size: 0.7em;
-  color: var(--text-gray);
+.sg-item .sg-label {
+  font-size: 0.68em;
+  color: var(--text-muted);
   text-transform: uppercase;
-  margin-top: 2px;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  font-weight: 600;
 }
 
-.fact-list { list-style: none; padding: 0; }
-.fact-list li {
-  padding: 6px 0;
-  border-bottom: 1px solid #f0f0f0;
+.sg-item .sg-value {
+  font-size: 1.15em;
+  font-weight: 800;
+}
+
+.sg-item .sg-rank {
+  font-size: 0.7em;
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.sg-value.positive { color: var(--green); }
+.sg-value.negative { color: var(--red); }
+.sg-rank.good { color: var(--green); }
+.sg-rank.bad { color: var(--red); }
+
+.sg-source {
+  font-size: 0.72em;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 8px;
+  text-align: right;
+}
+
+.sg-unavailable {
+  padding: 16px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+/* Fun facts & history */
+.fun-facts-list, .open-history-list {
+  list-style: none;
+  padding: 0;
+}
+
+.fun-facts-list li {
+  padding: 4px 0 4px 16px;
+  position: relative;
   font-size: 0.88em;
   line-height: 1.4;
 }
-.fact-list li:last-child { border-bottom: none; }
-.fact-list li::before {
-  content: '\25B8';
-  color: var(--red);
-  margin-right: 8px;
-  font-weight: bold;
+
+.fun-facts-list li:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
 }
 
-.us-open-history-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.85em;
-}
-.us-open-history-table th {
-  background: var(--navy);
-  color: white;
-  padding: 6px 8px;
-  font-size: 0.8em;
-  text-align: left;
-}
-.us-open-history-table td {
-  padding: 5px 8px;
-  border-bottom: 1px solid #eee;
+.open-history-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.loading { text-align: center; padding: 60px 20px; color: var(--text-gray); font-style: italic; }
+.open-year-chip {
+  padding: 4px 10px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.82em;
+}
+
+.open-year-chip .yr { color: var(--text-muted); font-size: 0.9em; }
+.open-year-chip .fin { font-weight: 700; color: var(--navy); margin-left: 4px; }
+.open-year-chip.winner { background: var(--gold); border-color: var(--gold-dim); }
+.open-year-chip.winner .fin { color: var(--navy-dark); }
+
+.top-finishes-text {
+  font-size: 0.88em;
+  line-height: 1.5;
+  color: var(--text-dark);
+}
+
+/* Loading and error */
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+
 .loading .spinner {
   display: inline-block;
   width: 30px; height: 30px;
-  border: 3px solid var(--blue-light);
+  border: 3px solid var(--border);
   border-top-color: var(--navy);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin-bottom: 12px;
 }
+
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.error-banner { background: #fff3cd; color: #856404; padding: 10px 16px; text-align: center; font-size: 0.85em; display: none; }
-
-.ownership-bar {
-  background: var(--navy);
-  height: 6px;
-  border-radius: 3px;
-  margin-top: 3px;
-}
-
-footer {
+.error-msg {
   text-align: center;
-  padding: 20px;
-  color: var(--text-gray);
-  font-size: 0.75em;
-  border-top: 1px solid #ddd;
-  margin-top: 20px;
+  padding: 30px;
+  color: var(--burgundy);
+  font-style: italic;
 }
 
-@media (max-width: 600px) {
-  header h1 { font-size: 1.3em; }
-  .tab-btn { padding: 10px 12px; font-size: 0.78em; }
+.no-tournament {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+
+.no-tournament h3 {
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  header h1 { font-size: 1.15em; letter-spacing: 2px; }
+  header h1 .the-open { font-size: 1.15em; }
+  header .subtitle { font-size: 0.7em; letter-spacing: 3px; }
+  .tab-btn { padding: 9px 12px; font-size: 0.75em; }
   .container { padding: 8px; }
-  thead th, tbody td { padding: 6px 4px; font-size: 0.78em; }
-  .hide-mobile { display: none; }
-  .modal { margin: 10px; }
-  .modal-header .player-score { font-size: 1.4em; right: 14px; }
+  .picks-grid { grid-template-columns: 1fr; }
+  .sg-grid { grid-template-columns: repeat(3, 1fr); }
+  .modal-card { margin-top: 10px; }
+  .modal-header h2 { font-size: 1.15em; padding-right: 60px; }
+  .modal-bio { grid-template-columns: 1fr; }
+  .hide-mobile { display: none !important; }
+  .sg-iframe-container { height: 500px; }
+  td, th { padding: 8px 5px !important; font-size: 0.82em !important; }
+}
+
+@media (max-width: 480px) {
+  header h1 { font-size: 1em; }
+  .tab-btn { padding: 8px 8px; font-size: 0.7em; letter-spacing: 0; }
+  .sg-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.tiebreaker-cell {
+  font-size: 0.8em;
+  color: var(--text-muted);
 }
 </style>
 </head>
 <body>
 
 <header>
-  <h1><span class="us">U.S.</span> Open Pool Leaderboard</h1>
-  <div class="subtitle" id="tourney-subtitle">Loading...</div>
+  <div class="header-inner">
+    <div class="title-line">
+      <h1><span class="the-open">The Open</span> Championship Pool</h1>
+    </div>
+    <div class="subtitle">Est. 2026 &middot; The Claret Jug</div>
+    <div class="status-line" id="statusLine">Loading tournament data...</div>
+  </div>
 </header>
 
-<nav class="tabs">
-  <button class="tab-btn active" data-tab="pool">Pool Standings</button>
-  <button class="tab-btn" data-tab="tournament">Tournament Leaderboard</button>
-  <button class="tab-btn" data-tab="ownership">Ownership</button>
-  <button class="tab-btn" data-tab="livestats">Live SG Stats</button>
-</nav>
-
-<div class="error-banner" id="error-banner"></div>
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('standings')">Pool Standings</button>
+  <button class="tab-btn" onclick="switchTab('leaderboard')">Leaderboard</button>
+  <button class="tab-btn" onclick="switchTab('ownership')">Ownership</button>
+  <button class="tab-btn" onclick="switchTab('sg')">Live SG Stats</button>
+</div>
 
 <div class="container">
-  <div class="last-updated" id="last-updated"></div>
-
-  <div id="pool-tab" class="tab-content active">
-    <div id="pool-loading" class="loading"><div class="spinner"></div><br>Loading leaderboard data...</div>
-    <div style="text-align:center;color:var(--navy);font-size:0.85em;margin-bottom:10px;font-style:italic;opacity:0.7">Click on any player name to learn more about them</div>
-    <table id="pool-table" style="display:none">
-      <thead><tr>
-        <th class="center">POS</th>
-        <th>PLAYER</th>
-        <th class="center">SCORE</th>
-        <th class="center">BEST 4</th>
-        <th class="center hide-mobile">TB</th>
-      </tr></thead>
-      <tbody id="pool-body"></tbody>
-    </table>
+  <div id="tab-standings" class="tab-content active">
+    <div class="loading" id="standingsLoading"><div class="spinner"></div><br>Loading pool standings...</div>
   </div>
-
-  <div id="tournament-tab" class="tab-content">
-    <table id="tourney-table">
-      <thead><tr>
-        <th class="center">POS</th>
-        <th>PLAYER</th>
-        <th class="center">TOT</th>
-        <th class="center">THRU</th>
-        <th class="center">TODAY</th>
-        <th class="center hide-mobile">R1</th>
-        <th class="center hide-mobile">R2</th>
-        <th class="center hide-mobile">R3</th>
-        <th class="center hide-mobile">R4</th>
-      </tr></thead>
-      <tbody id="tourney-body"></tbody>
-    </table>
+  <div id="tab-leaderboard" class="tab-content">
+    <div class="loading" id="leaderboardLoading"><div class="spinner"></div><br>Loading leaderboard...</div>
   </div>
-
-  <div id="ownership-tab" class="tab-content">
-    <table id="ownership-table">
-      <thead><tr>
-        <th>GOLFER</th>
-        <th class="center">SCORE</th>
-        <th class="center">OWNED</th>
-        <th class="center">% OWNED</th>
-        <th class="hide-mobile">PICKED BY</th>
-      </tr></thead>
-      <tbody id="ownership-body"></tbody>
-    </table>
-  </div>
-
-  <div id="livestats-tab" class="tab-content">
-    <div style="text-align:center;padding:12px 0">
-      <p style="font-size:0.9em;color:var(--text-gray);margin-bottom:8px">Live strokes gained stats powered by Data Golf</p>
-      <a href="https://datagolf.com/live-stats/pga-tour" target="_blank" rel="noopener" style="display:inline-block;background:var(--navy);color:white;padding:10px 24px;border-radius:6px;text-decoration:none;font-weight:700;font-size:0.95em">Open Live Stats on Data Golf &rarr;</a>
+  <div id="tab-ownership" class="tab-content"></div>
+  <div id="tab-sg" class="tab-content">
+    <div class="sg-tab-content">
+      <h3 style="color:var(--navy);margin-bottom:12px;">Live Strokes Gained Statistics</h3>
+      <a class="sg-link-btn" href="https://datagolf.com/live-stats/pga-tour" target="_blank" rel="noopener">Open DataGolf Live Stats</a>
+      <div class="sg-iframe-container" id="sgIframeContainer">
+        <iframe src="https://datagolf.com/live-stats/pga-tour" title="DataGolf Live SG Stats" loading="lazy" onerror="document.getElementById('sgFallback').style.display='block';this.style.display='none';"></iframe>
+        <div class="sg-fallback" id="sgFallback">If the live stats do not load above, click the button to open DataGolf in a new tab. Some sites restrict embedded viewing.</div>
+      </div>
     </div>
-    <iframe id="datagolf-frame" src="https://datagolf.com/live-stats/pga-tour" style="width:100%;height:80vh;border:2px solid var(--navy);border-radius:8px;margin-top:8px" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
-    <p style="text-align:center;font-size:0.75em;color:var(--text-gray);margin-top:8px">If the embed doesn't load, use the button above to open Data Golf directly.</p>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-overlay">
-  <div class="modal">
-    <div class="modal-header">
-      <button class="modal-close" id="modal-close">&times;</button>
-      <h2 id="modal-name"></h2>
-      <div class="player-meta" id="modal-meta"></div>
-      <div class="player-score" id="modal-score"></div>
-    </div>
-    <div class="modal-body" id="modal-body"></div>
-  </div>
+<div class="modal-overlay" id="playerModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-card" id="modalCard"></div>
 </div>
-
-<footer>Auto-refreshes every 60 seconds &bull; Data from ESPN</footer>
 
 <script>
-const PICKS = [
-  { name: "Martin Grier", picks: ["Scottie Scheffler","Brooks Koepka","Wyndham Clark","Harris English","Brian Harman","Tommy Fleetwood"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -3 },
-  { name: "Declan Caroll", picks: ["Scottie Scheffler","Cameron Young","Patrick Cantlay","Shane Lowry","Jason Day","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -5 },
-  { name: "Samson Weiner", picks: ["Scottie Scheffler","Matt Fitzpatrick","Maverick McNealy","Ryan Gerard","Daniel Berger","Cameron Young"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -4 },
-  { name: "Henry Hunter", picks: ["Rory McIlroy","Russell Henley","Chris Gotterup","Harris English","Jackson Koivun","Sam Burns"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -2 },
-  { name: "Lachlan Isaacs", picks: ["Jon Rahm","Tommy Fleetwood","Chris Gotterup","Shane Lowry","Jason Day","Ludvig Åberg"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: 2 },
-  { name: "Jake Haas", picks: ["Scottie Scheffler","Tommy Fleetwood","Hideki Matsuyama","Gary Woodland","Dustin Johnson","Tyrrell Hatton"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: 2 },
-  { name: "Seth Hendon", picks: ["Scottie Scheffler","Matt Fitzpatrick","Viktor Hovland","Shane Lowry","Akshay Bhatia","Sam Burns"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -3 },
-  { name: "David Hendon", picks: ["Rory McIlroy","Tommy Fleetwood","Min Woo Lee","Gary Woodland","Sepp Straka","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -4 },
-  { name: "Charlie Hoine", picks: ["Scottie Scheffler","Cameron Young","Patrick Cantlay","Shane Lowry","Keith Mitchell","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -1 },
-  { name: "Scott Black", picks: ["Scottie Scheffler","Russell Henley","Chris Gotterup","Bud Cauley","Sepp Straka","Tommy Fleetwood"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -2 },
-  { name: "Nick Purnell", picks: ["Scottie Scheffler","Brooks Koepka","J.J. Spaun","Robert MacIntyre","Corey Conners","Cameron Young"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: 0 },
-  { name: "Charlie Walsh", picks: ["Rory McIlroy","Brooks Koepka","Justin Rose","Shane Lowry","Rickie Fowler","Tommy Fleetwood"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: 2 },
-  { name: "Finn Fox", picks: ["Scottie Scheffler","Brooks Koepka","Justin Rose","Jordan Spieth","Keith Mitchell","Ludvig Åberg"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -7 },
-  { name: "Ian Hendrix", picks: ["Rory McIlroy","Cameron Young","Justin Thomas","Harris English","Keith Mitchell","Ludvig Åberg"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -3 },
-  { name: "Zuf and Schorr", picks: ["Scottie Scheffler","Tommy Fleetwood","Aaron Rai","Cameron Smith","Alex Noren","Patrick Reed"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -2 },
-  { name: "Patrick Kelly", picks: ["Rory McIlroy","Matt Fitzpatrick","Chris Gotterup","Shane Lowry","Keegan Bradley","Cameron Young"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -4 },
-  { name: "Will King", picks: ["Scottie Scheffler","Matt Fitzpatrick","Wyndham Clark","Shane Lowry","Sepp Straka","Cameron Young"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -8 },
-  { name: "Ryan McBride", picks: ["Scottie Scheffler","Tommy Fleetwood","Chris Gotterup","Alex Fitzpatrick","Jackson Koivun","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -3 },
-  { name: "Owen Vogel", picks: ["Scottie Scheffler","Matt Fitzpatrick","Justin Thomas","Shane Lowry","Sepp Straka","Sam Burns"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -3 },
-  { name: "Reid Belcher", picks: ["Rory McIlroy","Cameron Young","Viktor Hovland","Robert MacIntyre","Alex Noren","Tommy Fleetwood"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -1 },
-  { name: "Ben Schiff", picks: ["Scottie Scheffler","Sam Burns","Wyndham Clark","Jordan Spieth","Daniel Berger","Cameron Young"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -1 },
-  { name: "Jake Ferrans", picks: ["Scottie Scheffler","Tommy Fleetwood","Justin Rose","Robert MacIntyre","Alex Noren","Ludvig Åberg"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -7 },
-  { name: "Charlie Brandow", picks: ["Scottie Scheffler","Cameron Young","Chris Gotterup","Shane Lowry","Akshay Bhatia","Tommy Fleetwood"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -4 },
-  { name: "Eli Schuh", picks: ["Scottie Scheffler","Tommy Fleetwood","Justin Rose","Shane Lowry","Jackson Koivun","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -2 },
-  { name: "Charlie Torinus", picks: ["Rory McIlroy","Patrick Reed","Justin Thomas","Kristoffer Reitan","Daniel Berger","Tommy Fleetwood"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: 0 },
-  { name: "Matt Daniel", picks: ["Scottie Scheffler","Matt Fitzpatrick","Justin Rose","Jordan Spieth","Jason Day","Cameron Young"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -4 },
-  { name: "Joseph Angella", picks: ["Rory McIlroy","Ludvig Åberg","Aaron Rai","Shane Lowry","Brian Harman","Bryson DeChambeau"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -3 },
-  { name: "Nate²", picks: ["Xander Schauffele","Russell Henley","J.J. Spaun","Jacob Bridgeman","Keith Mitchell","Sam Burns"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -2 },
-  { name: "Jack Marcus", picks: ["Scottie Scheffler","Ludvig Åberg","Justin Rose","Shane Lowry","Jason Day","Bryson DeChambeau"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -7 },
-  { name: "Nick Ascione", picks: ["Xander Schauffele","Cameron Young","Chris Gotterup","Jacob Bridgeman","Jason Day","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -6 },
-  { name: "Landon Jones", picks: ["Rory McIlroy","Tommy Fleetwood","Chris Gotterup","Kristoffer Reitan","Jason Day","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -3 },
-  { name: "Alex Nickel", picks: ["Scottie Scheffler","Matt Fitzpatrick","Patrick Cantlay","Bud Cauley","David Puig","Ludvig Åberg"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -1 },
-  { name: "Oliver Munakash", picks: ["Scottie Scheffler","Bryson DeChambeau","Wyndham Clark","Nicolai Højgaard","Brian Harman","Tommy Fleetwood"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -4 },
-  { name: "Drew Schlesinger", picks: ["Rory McIlroy","Matt Fitzpatrick","Hideki Matsuyama","Ben Griffin","Jason Day","Cameron Young"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: 2 },
-  { name: "Luke Travaglini", picks: ["Scottie Scheffler","Ludvig Åberg","Justin Rose","Cameron Smith","Harry Hall","Justin Thomas"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -7 }
-];
-
 const ESPN_URL = 'https://site.api.espn.com/apis/site/v2/sports/golf/pga/scoreboard';
 
+const PICKS = [
+  { name: "Samson Weiner", picks: ["Scottie Scheffler","Matt Fitzpatrick","Shane Lowry","Joaquin Niemann","Cameron Smith","Ludvig Aberg"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -6 },
+  { name: "Ben Schiff", picks: ["Rory McIlroy","Wyndham Clark","Min Woo Lee","Nicolai Hojgaard","Rasmus Hojgaard","Tommy Fleetwood"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -8 },
+  { name: "Jonah Weiner", picks: ["Scottie Scheffler","Cameron Young","Min Woo Lee","Jordan Spieth","Alex Smalley","Jon Rahm"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -13 },
+  { name: "Martin Grier", picks: ["Scottie Scheffler","Tommy Fleetwood","Shane Lowry","Brooks Koepka","Gary Woodland","Brian Harman"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -10 },
+  { name: "Matt Daniel", picks: ["Rory McIlroy","Matt Fitzpatrick","Robert MacIntyre","Alex Fitzpatrick","Cameron Smith","Justin Rose"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -9 },
+  { name: "Jack Marcus", picks: ["Rory McIlroy","Matt Fitzpatrick","Robert MacIntyre","Jordan Spieth","Jason Day","Viktor Hovland"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -8 },
+  { name: "Tom Fanning", picks: ["Rory McIlroy","Xander Schauffele","Shane Lowry","Alex Fitzpatrick","Sepp Straka","Tommy Fleetwood"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -7 },
+  { name: "Declan Caroll", picks: ["Scottie Scheffler","Tommy Fleetwood","Russell Henley","Brooks Koepka","Hideki Matsuyama","Jon Rahm"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -13 },
+  { name: "John Desantis", picks: ["Scottie Scheffler","Chris Gotterup","Tom Kim","Jordan Spieth","Cameron Smith","Tommy Fleetwood"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -16 },
+  { name: "Hayden Dearie", picks: ["Scottie Scheffler","Viktor Hovland","Tyrrell Hatton","Nicolai Hojgaard","Kurt Kitayama","Patrick Cantlay"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -13 },
+  { name: "Schorr & Zuf", picks: ["Rory McIlroy","Chris Gotterup","Russell Henley","Alex Fitzpatrick","Ryan Gerard","Xander Schauffele"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -12 },
+  { name: "Scott Black", picks: ["Scottie Scheffler","Collin Morikawa","Robert MacIntyre","Jordan Spieth","Hideki Matsuyama","Ludvig Aberg"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -16 },
+  { name: "Charlie Walsh", picks: ["Scottie Scheffler","Tommy Fleetwood","Robert MacIntyre","Alex Fitzpatrick","Cameron Smith","Ludvig Aberg"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -12 },
+  { name: "Finn Fox", picks: ["Rory McIlroy","Tommy Fleetwood","Shane Lowry","Brooks Koepka","Keegan Bradley","Ludvig Aberg"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -8 },
+  { name: "Luke Travaglini", picks: ["Scottie Scheffler","Viktor Hovland","Shane Lowry","J.J. Spaun","Keegan Bradley","Ludvig Aberg"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -11 },
+  { name: "Nick Purnell", picks: ["Scottie Scheffler","Matt Fitzpatrick","Russell Henley","Harris English","Haotong Li","Ludvig Aberg"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -11 },
+  { name: "Nick Ascione", picks: ["Scottie Scheffler","Xander Schauffele","Patrick Reed","Joaquin Niemann","Sepp Straka","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -11 },
+  { name: "Owen Vogel", picks: ["Scottie Scheffler","Tommy Fleetwood","Tom Kim","Joaquin Niemann","Alex Noren","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -10 },
+  { name: "AJ Dale", picks: ["Scottie Scheffler","Matt Fitzpatrick","Robert MacIntyre","Nicolai Hojgaard","Max Homa","Viktor Hovland"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -11 },
+  { name: "Jake Haas", picks: ["Scottie Scheffler","Chris Gotterup","Tom Kim","Jordan Spieth","Hideki Matsuyama","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -8 },
+  { name: "Lachlan Isaacs", picks: ["Rory McIlroy","Tommy Fleetwood","Tom Kim","Joaquin Niemann","Hideki Matsuyama","Robert MacIntyre"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -15 },
+  { name: "Patrick Kelly", picks: ["Rory McIlroy","Matt Fitzpatrick","Tom Kim","Alex Fitzpatrick","Hideki Matsuyama","Tyrrell Hatton"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -9 },
+  { name: "Jake Ferrans", picks: ["Scottie Scheffler","Xander Schauffele","Tyrrell Hatton","Ben Griffin","Sahith Theegala","Viktor Hovland"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -15 },
+  { name: "Drew Schlesinger", picks: ["Rory McIlroy","Xander Schauffele","Tyrrell Hatton","Harris English","Hideki Matsuyama","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -13 },
+  { name: "Eliot Gottsegen", picks: ["Scottie Scheffler","Viktor Hovland","Justin Rose","Nicolai Hojgaard","Jason Day","Xander Schauffele"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -10 },
+  { name: "Ryan McBride", picks: ["Scottie Scheffler","Tommy Fleetwood","Robert MacIntyre","J.J. Spaun","Hideki Matsuyama","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -14 },
+  { name: "Nate²", picks: ["Scottie Scheffler","Viktor Hovland","Patrick Reed","Rickie Fowler","Keith Mitchell","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -13 },
+  { name: "Alex Nickel", picks: ["Scottie Scheffler","Tommy Fleetwood","Robert MacIntyre","Alex Fitzpatrick","Kurt Kitayama","Matt Fitzpatrick"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -12 },
+  { name: "Will Wallace", picks: ["Rory McIlroy","Matt Fitzpatrick","Tyrrell Hatton","Maverick McNealy","Kurt Kitayama","Tommy Fleetwood"], tiers: ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Flex"], tiebreaker: -14 }
+];
+
 const PLAYER_DATA = {
-  "Scottie Scheffler": { country: "USA", age: 29, hometown: "Dallas, TX", turnedPro: 2018, college: "Texas", funFacts: ["Dominant force since 2022 — has won 15+ PGA Tour events","World #1 for most of the last 3 years","Won 2024 Masters, Players, and Memorial in same season","Was arrested at the 2024 PGA Championship for a traffic incident, still finished T8"], sgData: { total: 2.162, totalR: 1, offTee: 0.657, offTeeR: 4, approach: 0.504, approachR: 16, aroundGreen: 0.535, aroundGreenR: 3, putting: 0.466, puttingR: 19 }, topFinishes: "15+ PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "T7" },{ year: 2024, finish: "T41" },{ year: 2023, finish: "T2" },{ year: 2022, finish: "T2" }] },
-  "Rory McIlroy": { country: "Northern Ireland", age: 37, hometown: "Holywood, N. Ireland", turnedPro: 2007, college: "None (turned pro at 18)", funFacts: ["4-time major champion (2 PGA, 1 US Open, 1 Open)","Won 2011 US Open at Congressional by 8 shots at age 22","Heartbreaking T2 at 2024 US Open — missed short putts on 16 and 18","Still chasing that elusive 5th major and career Grand Slam"], sgData: { total: 2.10, offTee: 0.89, approach: 0.65, aroundGreen: 0.18, putting: 0.38 }, topFinishes: "25+ PGA Tour wins, 4 majors", usOpenHistory: [{ year: 2025, finish: "T19" },{ year: 2024, finish: "T2" },{ year: 2023, finish: "T12" },{ year: 2022, finish: "T5" },{ year: 2011, finish: "Won" }] },
-  "Xander Schauffele": { country: "USA", age: 32, hometown: "Las Vegas, NV", turnedPro: 2015, college: "San Diego State", funFacts: ["Won 2024 PGA Championship for first major","Father is German-French-Taiwanese immigrant who was hit by a drunk driver","Olympic gold medalist (2020 Tokyo)","Known as one of golf's most consistent ball-strikers"], sgData: { total: 1.138, totalR: 8, offTee: 0.524, offTeeR: 14, approach: 0.389, approachR: 27, aroundGreen: 0.005, aroundGreenR: 87, putting: 0.22, puttingR: 48 }, topFinishes: "11 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "T12" },{ year: 2024, finish: "T6" },{ year: 2023, finish: "T3" },{ year: 2021, finish: "T5" }] },
-  "Bryson DeChambeau": { country: "USA", age: 32, hometown: "Dallas, TX", turnedPro: 2016, college: "SMU", funFacts: ["Back-to-back US Open champion (2020, 2024)","Known as 'The Scientist' for his physics-based approach","Uses single-length irons","Gained 40+ lbs of muscle to become longest driver on tour"], sgData: null, topFinishes: "9 PGA Tour wins, 2 US Opens", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "Won" },{ year: 2023, finish: "T47" },{ year: 2020, finish: "Won" }] },
-  "Jon Rahm": { country: "Spain", age: 31, hometown: "Scottsdale, AZ", turnedPro: 2016, college: "Arizona State", funFacts: ["Won 2021 US Open at Torrey Pines","Left PGA Tour for LIV Golf in Dec 2023","2023 Masters champion","Finished T7 at 2025 US Open — always a threat at this event"], sgData: null, topFinishes: "11 PGA Tour wins, 2 majors", usOpenHistory: [{ year: 2025, finish: "T7" },{ year: 2023, finish: "T3" },{ year: 2022, finish: "T12" },{ year: 2021, finish: "Won" }] },
-  "Ludvig Åberg": { country: "Sweden", age: 26, hometown: "Eslöv, Sweden", turnedPro: 2023, college: "Texas Tech", funFacts: ["Fastest player to reach World Top 10 in OWGR history","Was the #1 amateur in the world before turning pro","Ryder Cup debut in 2023 — went 3-0 for Europe","Missed the cut at 2025 US Open — looking for redemption"], sgData: { total: 1.486, totalR: 2, offTee: 0.513, offTeeR: 16, approach: 0.577, approachR: 11, aroundGreen: 0.134, aroundGreenR: 54, putting: 0.261, puttingR: 43 }, topFinishes: "3 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "T12" }] },
-  "Cameron Young": { country: "USA", age: 28, hometown: "Scarborough, NY", turnedPro: 2019, college: "Wake Forest", funFacts: ["2022 PGA Tour Rookie of the Year","Father is head pro at Sleepy Hollow CC in NY","T4 at 2025 US Open — his best major finish","One of the longest drivers on tour"], sgData: { total: 1.377, totalR: 6, offTee: 0.576, offTeeR: 10, approach: 0.445, approachR: 23, aroundGreen: 0.235, aroundGreenR: 32, putting: 0.12, puttingR: 62 }, topFinishes: "1 PGA Tour win", usOpenHistory: [{ year: 2025, finish: "T4" },{ year: 2024, finish: "T28" },{ year: 2023, finish: "T23" },{ year: 2022, finish: "T15" }] },
-  "Brooks Koepka": { country: "USA", age: 36, hometown: "Jupiter, FL", turnedPro: 2012, college: "Florida State", funFacts: ["Won back-to-back US Opens (2017, 2018)","5-time major champion","Plays on LIV Golf","T12 at 2025 US Open — always raises his game for majors"], sgData: { total: 0.964, totalR: 17, offTee: 0.244, offTeeR: 44, approach: 0.713, approachR: 5, aroundGreen: 0.122, aroundGreenR: 56, putting: -0.116, puttingR: 104 }, topFinishes: "10 PGA Tour wins, 5 majors", usOpenHistory: [{ year: 2025, finish: "T12" },{ year: 2024, finish: "T26" },{ year: 2023, finish: "CUT" },{ year: 2019, finish: "2nd" },{ year: 2018, finish: "Won" },{ year: 2017, finish: "Won" }] },
-  "Tommy Fleetwood": { country: "England", age: 35, hometown: "Southport, England", turnedPro: 2010, college: "None", funFacts: ["Finished runner-up at 2018 US Open at Shinnecock","Known for his flowing hair","Shot 63 at 2018 US Open final round","Missed cut at 2025 US Open but remains a fan favorite"], sgData: { total: 1.339, totalR: 7, offTee: 0.452, offTeeR: 22, approach: 0.295, approachR: 44, aroundGreen: 0.512, aroundGreenR: 5, putting: 0.079, puttingR: 69 }, topFinishes: "2 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "CUT" },{ year: 2023, finish: "T4" },{ year: 2018, finish: "2nd" }] },
-  "Matt Fitzpatrick": { country: "England", age: 31, hometown: "Sheffield, England", turnedPro: 2014, college: "Northwestern", funFacts: ["Won 2022 US Open at The Country Club in Brookline","Also won 2013 US Amateur at the same course","Brother Alex is also a touring professional","Defending his US Open legacy as a former champion"], sgData: { total: 1.472, totalR: 3, offTee: 0.319, offTeeR: 33, approach: 0.753, approachR: 4, aroundGreen: 0.499, aroundGreenR: 6, putting: -0.099, puttingR: 102 }, topFinishes: "4 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "T38" },{ year: 2024, finish: "T8" },{ year: 2023, finish: "T44" },{ year: 2022, finish: "Won" }] },
-  "Justin Thomas": { country: "USA", age: 33, hometown: "Louisville, KY", turnedPro: 2013, college: "Alabama", funFacts: ["2-time PGA Championship winner","Shot 59 at 2017 Sony Open","Father Mike is a PGA club professional","Missed cut at 2025 US Open — fighting to regain top form"], sgData: { total: 0.589, totalR: 37, offTee: 0.139, offTeeR: 56, approach: 0.059, approachR: 81, aroundGreen: 0.448, aroundGreenR: 9, putting: -0.058, puttingR: 94 }, topFinishes: "15 PGA Tour wins, 2 majors", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "CUT" },{ year: 2023, finish: "T21" },{ year: 2020, finish: "T8" }] },
-  "Viktor Hovland": { country: "Norway", age: 28, hometown: "Oslo, Norway", turnedPro: 2019, college: "Oklahoma State", funFacts: ["First Norwegian to win on the PGA Tour","Won 2023 FedExCup","3rd at 2025 US Open — his best US Open finish","Low amateur at 2019 US Open at Pebble Beach"], sgData: { total: 0.543, totalR: 43, offTee: -0.092, offTeeR: 98, approach: 0.451, approachR: 21, aroundGreen: 0.138, aroundGreenR: 52, putting: 0.046, puttingR: 73 }, topFinishes: "7 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "3rd" },{ year: 2024, finish: "CUT" },{ year: 2023, finish: "T2" },{ year: 2022, finish: "T4" },{ year: 2019, finish: "T12 (a)" }] },
-  "Jordan Spieth": { country: "USA", age: 32, hometown: "Dallas, TX", turnedPro: 2012, college: "Texas (1 year)", funFacts: ["Won 3 majors before age 24 (Masters, US Open, Open)","Won 2015 US Open at Chambers Bay","T23 at 2025 US Open — still competitive in majors","Famous for aggressive play and creative shot-making"], sgData: { total: 0.578, totalR: 40, offTee: 0.152, offTeeR: 54, approach: 0.064, approachR: 79, aroundGreen: 0.08, aroundGreenR: 64, putting: 0.282, puttingR: 40 }, topFinishes: "13 PGA Tour wins, 3 majors", usOpenHistory: [{ year: 2025, finish: "T23" },{ year: 2024, finish: "CUT" },{ year: 2022, finish: "T2" },{ year: 2015, finish: "Won" }] },
-  "Sam Burns": { country: "USA", age: 29, hometown: "Shreveport, LA", turnedPro: 2017, college: "LSU", funFacts: ["6-time PGA Tour winner","Led 2025 Masters after Round 1","T7 at 2025 US Open — breakout major performance","Known for fiery putting celebrations"], sgData: { total: 0.832, totalR: 23, offTee: 0.173, offTeeR: 52, approach: 0.114, approachR: 72, aroundGreen: -0.102, aroundGreenR: 106, putting: 0.647, puttingR: 6 }, topFinishes: "6 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "T7" },{ year: 2024, finish: "T35" },{ year: 2023, finish: "T21" }] },
-  "Patrick Cantlay": { country: "USA", age: 34, hometown: "Long Beach, CA", turnedPro: 2012, college: "UCLA", funFacts: ["Won 2021 FedExCup and Tour Championship","Known for his deliberate pace of play","Nicknamed 'Patty Ice' for his clutch putting","Missed cut at 2025 US Open"], sgData: { total: 1.021, totalR: 14, offTee: 0.394, offTeeR: 29, approach: 0.365, approachR: 30, aroundGreen: 0.312, aroundGreenR: 23, putting: -0.049, puttingR: 92 }, topFinishes: "9 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "T22" },{ year: 2023, finish: "T22" },{ year: 2022, finish: "T13" }] },
-  "Shane Lowry": { country: "Ireland", age: 39, hometown: "Clara, Ireland", turnedPro: 2009, college: "None", funFacts: ["Won 2019 Open Championship at Portrush by 6 shots","Won Irish Open as an amateur in 2009","Missed cut at 2025 US Open","Known for his fan-friendly personality"], sgData: { total: 0.81, totalR: 24, offTee: 0.197, offTeeR: 50, approach: 0.371, approachR: 29, aroundGreen: -0.046, aroundGreenR: 95, putting: 0.287, puttingR: 39 }, topFinishes: "5 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "T5" },{ year: 2023, finish: "T53" },{ year: 2016, finish: "2nd" }] },
-  "Justin Rose": { country: "England", age: 46, hometown: "Johannesburg / England", turnedPro: 1998, college: "None", funFacts: ["Won 2013 US Open at Merion","Olympic gold medalist (2016 Rio)","Made his Open Championship debut at age 17 as amateur","One of the most consistent players in US Open history"], sgData: { total: 0.359, totalR: 59, offTee: -0.057, offTeeR: 91, approach: 0.495, approachR: 18, aroundGreen: -0.028, aroundGreenR: 92, putting: -0.051, puttingR: 93 }, topFinishes: "10 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "T12" },{ year: 2023, finish: "T14" },{ year: 2013, finish: "Won" }] },
-  "Chris Gotterup": { country: "USA", age: 26, hometown: "Little Silver, NJ", turnedPro: 2022, college: "Oklahoma", funFacts: ["2022 Haskins Award winner as best college golfer","T23 at 2025 US Open — proved he belongs in majors","Grew up playing at Rumson Country Club in NJ","One of the brightest young talents on Tour"], sgData: { total: 1.137, totalR: 9, offTee: 0.497, offTeeR: 19, approach: 0.283, approachR: 47, aroundGreen: 0.048, aroundGreenR: 75, putting: 0.31, puttingR: 37 }, topFinishes: "No wins yet, multiple top-10s", usOpenHistory: [{ year: 2025, finish: "T23" },{ year: 2024, finish: "CUT" }] },
-  "Russell Henley": { country: "USA", age: 35, hometown: "Macon, GA", turnedPro: 2011, college: "Georgia", funFacts: ["Won 2013 Sony Open in his first start as a member","Led 2023 US Open after 36 holes","T10 at 2025 US Open — consistently strong in this event","Known as one of the best iron players on tour"], sgData: { total: 1.05, totalR: 12, offTee: 0.27, offTeeR: 43, approach: 0.275, approachR: 51, aroundGreen: 0.161, aroundGreenR: 48, putting: 0.344, puttingR: 33 }, topFinishes: "3 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "T10" },{ year: 2024, finish: "T27" },{ year: 2023, finish: "T5" },{ year: 2022, finish: "T14" }] },
-  "Wyndham Clark": { country: "USA", age: 32, hometown: "Denver, CO", turnedPro: 2017, college: "Oregon", funFacts: ["Won 2023 US Open at LACC by 1 shot over Rory McIlroy","His mother passed away from breast cancer when he was 14","Missed cut at 2025 US Open defending his title","Has said the 2023 US Open win was for his mom"], sgData: { total: 0.916, totalR: 19, offTee: -0.069, offTeeR: 94, approach: 0.545, approachR: 14, aroundGreen: 0.321, aroundGreenR: 20, putting: 0.12, puttingR: 62 }, topFinishes: "4 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "T20" },{ year: 2023, finish: "Won" }] },
-  "Hideki Matsuyama": { country: "Japan", age: 34, hometown: "Matsuyama, Japan", turnedPro: 2013, college: "Tohoku Fukushi", funFacts: ["First Japanese man to win a major (2021 Masters)","Low amateur at 2011 Masters","His caddie bowed to Augusta after his Masters win","T42 at 2025 US Open"], sgData: { total: 0.587, totalR: 38, offTee: -0.287, offTeeR: 131, approach: 0.413, approachR: 26, aroundGreen: 0.348, aroundGreenR: 16, putting: 0.113, puttingR: 64 }, topFinishes: "10 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "T42" },{ year: 2024, finish: "T3" },{ year: 2023, finish: "T35" },{ year: 2022, finish: "T18" }] },
-  "Robert MacIntyre": { country: "Scotland", age: 29, hometown: "Oban, Scotland", turnedPro: 2017, college: "None", funFacts: ["Left-handed golfer from the Scottish Highlands","Runner-up at 2025 US Open — his best major finish ever","Won 2024 RBC Canadian Open with his father as caddie","Fiery competitor known for his passion"], sgData: { total: 0.783, totalR: 25, offTee: 0.555, offTeeR: 13, approach: -0.332, approachR: 129, aroundGreen: 0.043, aroundGreenR: 76, putting: 0.517, puttingR: 13 }, topFinishes: "2 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "2nd" },{ year: 2024, finish: "T22" },{ year: 2023, finish: "CUT" }] },
-  "Tyrrell Hatton": { country: "England", age: 34, hometown: "Marlow, England", turnedPro: 2011, college: "None", funFacts: ["Known for his emotional on-course reactions","Joined LIV Golf in 2024","T4 at 2025 US Open — his best US Open result","Famous for his club-throwing and self-directed anger"], sgData: null, topFinishes: "2 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "T4" },{ year: 2024, finish: "T55" },{ year: 2023, finish: "T14" }] },
-  "Aaron Rai": { country: "England", age: 31, hometown: "Wolverhampton, England", turnedPro: 2015, college: "None", funFacts: ["Always wears two golf gloves","Won 2024 Wyndham Championship","T33 at 2025 US Open","One of the most accurate drivers on tour"], sgData: { total: 0.595, totalR: 36, offTee: 0.147, offTeeR: 55, approach: 0.496, approachR: 17, aroundGreen: 0.013, aroundGreenR: 84, putting: -0.062, puttingR: 95 }, topFinishes: "1 PGA Tour win", usOpenHistory: [{ year: 2025, finish: "T33" },{ year: 2024, finish: "T56" }] },
-  "Harris English": { country: "USA", age: 36, hometown: "Sea Island, GA", turnedPro: 2011, college: "Georgia", funFacts: ["Won 2021 Sentry TOC in an 8-hole playoff","Grew up on Sea Island and is a member there","T59 at 2025 US Open","Had career-threatening hip surgery in 2022"], sgData: { total: 0.763, totalR: 28, offTee: 0.333, offTeeR: 31, approach: -0.206, approachR: 119, aroundGreen: -0.011, aroundGreenR: 89, putting: 0.647, puttingR: 6 }, topFinishes: "3 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "T59" },{ year: 2024, finish: "CUT" },{ year: 2023, finish: "CUT" }] },
-  "Brian Harman": { country: "USA", age: 39, hometown: "Savannah, GA", turnedPro: 2010, college: "Georgia", funFacts: ["Won 2023 Open Championship at Royal Liverpool by 6 shots","Left-handed golfer","T59 at 2025 US Open","One of the smallest players on tour but deadly accurate"], sgData: { total: -0.219, totalR: 113, offTee: -0.253, offTeeR: 125, approach: 0.066, approachR: 78, aroundGreen: 0.054, aroundGreenR: 73, putting: -0.086, puttingR: 98 }, topFinishes: "4 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "T59" },{ year: 2024, finish: "T65" },{ year: 2023, finish: "CUT" },{ year: 2017, finish: "T2" }] },
-  "Maverick McNealy": { country: "USA", age: 30, hometown: "Portola Valley, CA", turnedPro: 2017, college: "Stanford", funFacts: ["Father Scott McNealy is co-founder of Sun Microsystems","Was #1 amateur in the world at Stanford","37th at 2025 US Open","Known for his work ethic and analytics approach"], sgData: { total: 0.935, totalR: 18, offTee: 0.124, offTeeR: 60, approach: -0.062, approachR: 102, aroundGreen: 0.341, aroundGreenR: 17, putting: 0.531, puttingR: 12 }, topFinishes: "No wins (multiple runner-ups)", usOpenHistory: [{ year: 2025, finish: "37th" },{ year: 2024, finish: "CUT" }] },
-  "Sepp Straka": { country: "Austria", age: 33, hometown: "Vienna, Austria", turnedPro: 2016, college: "Georgia", funFacts: ["First Austrian to win on PGA Tour","Has a twin brother who caddied for him","Missed cut at 2025 US Open","Represented Austria in the Olympics"], sgData: { total: 0.42, totalR: 53, offTee: 0.009, offTeeR: 85, approach: 0.571, approachR: 12, aroundGreen: -0.066, aroundGreenR: 99, putting: -0.094, puttingR: 99 }, topFinishes: "2 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "CUT" },{ year: 2023, finish: "T35" }] },
-  "Min Woo Lee": { country: "Australia", age: 27, hometown: "Perth, Australia", turnedPro: 2019, college: "None", funFacts: ["Sister Minjee Lee is a major champion on LPGA Tour","Won 2021 Scottish Open","Missed cut at 2025 US Open","Known for his aggressive style"], sgData: { total: 1.13, totalR: 10, offTee: 0.563, offTeeR: 12, approach: 0.105, approachR: 74, aroundGreen: 0.318, aroundGreenR: 21, putting: 0.144, puttingR: 60 }, topFinishes: "1 PGA Tour win", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "T22" }] },
-  "Rickie Fowler": { country: "USA", age: 37, hometown: "Murrieta, CA", turnedPro: 2009, college: "Oklahoma State", funFacts: ["Known for wearing Puma orange on Sundays","Won 2023 Rocket Mortgage Classic ending 4+ year winless drought","One of the most popular players among fans","Finished top-5 in all four majors without winning"], sgData: { total: 0.449, totalR: 50, offTee: 0.186, offTeeR: 51, approach: 0.086, approachR: 76, aroundGreen: -0.159, aroundGreenR: 124, putting: 0.336, puttingR: 34 }, topFinishes: "6 PGA Tour wins", usOpenHistory: [{ year: 2024, finish: "CUT" },{ year: 2023, finish: "T6" },{ year: 2014, finish: "2nd" }] },
-  "Patrick Reed": { country: "USA", age: 35, hometown: "Houston, TX", turnedPro: 2011, college: "Augusta Univ.", funFacts: ["Won 2018 Masters","Known as 'Captain America' for Ryder Cup heroics","T23 at 2025 US Open","Plays on LIV Golf"], sgData: null, topFinishes: "9 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "T23" },{ year: 2024, finish: "T35" },{ year: 2023, finish: "CUT" }] },
-  "Dustin Johnson": { country: "USA", age: 42, hometown: "Myrtle Beach, SC", turnedPro: 2007, college: "Coastal Carolina", funFacts: ["Won 2016 US Open and 2020 Masters","24-time PGA Tour winner","Captain of LIV Golf's 4 Aces","Missed cut at 2025 US Open"], sgData: null, topFinishes: "24 PGA Tour wins, 2 majors", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "CUT" },{ year: 2016, finish: "Won" }] },
-  "Keegan Bradley": { country: "USA", age: 40, hometown: "Woodstock, VT", turnedPro: 2008, college: "St. John's", funFacts: ["Won 2011 PGA Championship in his major debut","2025 US Ryder Cup captain","Aunt is LPGA legend Pat Bradley","T33 at 2025 US Open"], sgData: { total: 0.136, totalR: 76, offTee: 0.016, offTeeR: 84, approach: -0.136, approachR: 114, aroundGreen: 0.257, aroundGreenR: 31, putting: -0.002, puttingR: 82 }, topFinishes: "5 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "T33" },{ year: 2024, finish: "T45" },{ year: 2023, finish: "T40" }] },
-  "Keith Mitchell": { country: "USA", age: 34, hometown: "Chattanooga, TN", turnedPro: 2015, college: "Georgia", funFacts: ["Won 2019 Honda Classic","One of the longest drivers on the PGA Tour","Former Georgia Bulldog","Known for his raw power off the tee"], sgData: { total: 0.58, totalR: 39, offTee: 0.648, offTeeR: 5, approach: 0.252, approachR: 56, aroundGreen: -0.039, aroundGreenR: 94, putting: -0.282, puttingR: 121 }, topFinishes: "1 PGA Tour win", usOpenHistory: [{ year: 2024, finish: "CUT" }] },
-  "Alex Noren": { country: "Sweden", age: 44, hometown: "Stockholm, Sweden", turnedPro: 2005, college: "Oklahoma State", funFacts: ["10-time European Tour winner","Once practiced so hard he injured his wrist","Known as one of the hardest workers on tour","Represented Europe in 2018 Ryder Cup"], sgData: { total: 0.604, totalR: 35, offTee: -0.103, offTeeR: 100, approach: 0.104, approachR: 75, aroundGreen: 0.126, aroundGreenR: 55, putting: 0.477, puttingR: 16 }, topFinishes: "10 European Tour wins", usOpenHistory: [{ year: 2024, finish: "CUT" },{ year: 2023, finish: "T12" }] },
-  "Jason Day": { country: "Australia", age: 38, hometown: "Columbus, OH", turnedPro: 2006, college: "None", funFacts: ["Won 2015 PGA Championship","Rose to World #1 in 2015","T23 at 2025 US Open — still competing at a high level","Overcame a difficult childhood in rural Australia"], sgData: { total: 0.058, totalR: 81, offTee: -0.077, offTeeR: 96, approach: -0.598, approachR: 150, aroundGreen: 0.52, aroundGreenR: 4, putting: 0.213, puttingR: 51 }, topFinishes: "13 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "T23" },{ year: 2024, finish: "T46" },{ year: 2023, finish: "T12" },{ year: 2013, finish: "2nd" }] },
-  "Gary Woodland": { country: "USA", age: 42, hometown: "Topeka, KS", turnedPro: 2007, college: "Kansas", funFacts: ["Won 2019 US Open at Pebble Beach","Famous 3-wood from the bunker on 18 at Pebble","Underwent brain surgery in 2023 for a lesion","Missed cut at 2025 US Open"], sgData: { total: 0.691, totalR: 32, offTee: 0.736, offTeeR: 3, approach: 0.056, approachR: 82, aroundGreen: -0.361, aroundGreenR: 152, putting: 0.26, puttingR: 44 }, topFinishes: "4 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "CUT" },{ year: 2019, finish: "Won" }] },
-  "Cameron Smith": { country: "Australia", age: 32, hometown: "Brisbane, Australia", turnedPro: 2013, college: "None", funFacts: ["Won 2022 Open Championship and The Players","Famous for his mullet hairstyle","Joined LIV Golf after winning The Open","Missed cut at 2025 US Open"], sgData: null, topFinishes: "8 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2023, finish: "CUT" },{ year: 2022, finish: "CUT" }] },
-  "Nicolai Højgaard": { country: "Denmark", age: 25, hometown: "Billund, Denmark", turnedPro: 2019, college: "None", funFacts: ["Has a twin brother Rasmus who also plays pro golf","Won the 2021 Italian Open","Youngest Danish winner on European Tour","Known for his aggressive playing style"], sgData: { total: 1.013, totalR: 15, offTee: 0.285, offTeeR: 40, approach: 0.454, approachR: 19, aroundGreen: 0.122, aroundGreenR: 56, putting: 0.151, puttingR: 59 }, topFinishes: "2 DP World Tour wins", usOpenHistory: [{ year: 2024, finish: "T41" }] },
-  "Akshay Bhatia": { country: "USA", age: 23, hometown: "Wake Forest, NC", turnedPro: 2019, college: "None (skipped college)", funFacts: ["Turned pro at age 17, skipping college entirely","Won 2024 Valero Texas Open","Left-handed golfer","Missed cut at 2025 US Open"], sgData: { total: 0.913, totalR: 20, offTee: -0.27, offTeeR: 128, approach: 0.278, approachR: 50, aroundGreen: 0.265, aroundGreenR: 30, putting: 0.639, puttingR: 8 }, topFinishes: "2 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2024, finish: "CUT" }] },
-  "Jackson Koivun": { country: "USA", age: 21, hometown: "Raleigh, NC", turnedPro: null, college: "Auburn", funFacts: ["Top-ranked amateur in the world","Making his second US Open appearance as an amateur","Won 2024 Players Amateur","One of the most exciting amateur prospects in golf"], sgData: null, topFinishes: "Amateur — 2024 Players Amateur champion", usOpenHistory: [] },
-  "Ben Griffin": { country: "USA", age: 29, hometown: "Chapel Hill, NC", turnedPro: 2019, college: "UNC", funFacts: ["Tar Heel through and through","Won 2024 Cognizant Classic","T10 at 2025 US Open — breakout major performance","Known for his scrambling ability"], sgData: { total: 0.484, totalR: 46, offTee: -0.08, offTeeR: 97, approach: -0.284, approachR: 126, aroundGreen: 0.442, aroundGreenR: 10, putting: 0.405, puttingR: 24 }, topFinishes: "1 PGA Tour win", usOpenHistory: [{ year: 2025, finish: "T10" },{ year: 2024, finish: "CUT" }] },
-  "Corey Conners": { country: "Canada", age: 33, hometown: "Listowel, Ontario", turnedPro: 2015, college: "Kent State", funFacts: ["Won 2019 Valero Texas Open via Monday qualifying","One of the best ball-strikers on the PGA Tour","Withdrew from 2025 US Open","Represented Canada in the Olympics"], sgData: { total: -0.22, totalR: 114, offTee: 0.047, offTeeR: 76, approach: 0.289, approachR: 45, aroundGreen: -0.199, aroundGreenR: 129, putting: -0.358, puttingR: 134 }, topFinishes: "2 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "WD" },{ year: 2024, finish: "T8" },{ year: 2023, finish: "T28" }] },
-  "Daniel Berger": { country: "USA", age: 33, hometown: "Jupiter, FL", turnedPro: 2013, college: "Florida State", funFacts: ["4-time PGA Tour winner","Missed most of 2023 with a back injury","T46 at 2025 US Open","Father Jay is a longtime PGA Tour teaching pro"], sgData: { total: 0.25, totalR: 65, offTee: 0.024, offTeeR: 82, approach: 0.592, approachR: 10, aroundGreen: -0.34, aroundGreenR: 148, putting: -0.027, puttingR: 88 }, topFinishes: "4 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "T46" },{ year: 2022, finish: "CUT" },{ year: 2021, finish: "T15" }] },
-  "David Puig": { country: "Spain", age: 24, hometown: "Barcelona, Spain", turnedPro: 2023, college: "Arizona State", funFacts: ["Arizona State Sun Devil","Played on LIV Golf's Fireballs team","One of the brightest young Spanish talents","Known for his flair and personality on course"], sgData: null, topFinishes: "No PGA Tour wins", usOpenHistory: [] },
-  "Bud Cauley": { country: "USA", age: 35, hometown: "Jacksonville, FL", turnedPro: 2012, college: "Alabama", funFacts: ["Survived a serious car accident in 2018 at the Byron Nelson","Fought back from fractured ribs and collapsed lung","Missed cut at 2025 US Open","An inspiring comeback story"], sgData: { total: 0.467, totalR: 48, offTee: 0.099, offTeeR: 65, approach: 0.327, approachR: 38, aroundGreen: 0.231, aroundGreenR: 33, putting: -0.189, puttingR: 113 }, topFinishes: "No PGA Tour wins (multiple top-5s)", usOpenHistory: [{ year: 2025, finish: "CUT" },{ year: 2023, finish: "CUT" }] },
-  "Kristoffer Reitan": { country: "Norway", age: 26, hometown: "Stavanger, Norway", turnedPro: 2019, college: "None", funFacts: ["One of the rising Norwegian talents following Hovland","Played on the DP World Tour","Compatriot of Viktor Hovland","Known for his all-around solid game"], sgData: { total: 0.374, totalR: 58, offTee: 0.51, offTeeR: 17, approach: 0.01, approachR: 87, aroundGreen: -0.019, aroundGreenR: 90, putting: -0.126, puttingR: 105 }, topFinishes: "No major wins", usOpenHistory: [] },
-  "J.J. Spaun": { country: "USA", age: 34, hometown: "San Diego, CA", turnedPro: 2013, college: "San Diego State", funFacts: ["Reigning US Open champion — won the 2025 US Open with a dramatic 64-foot putt on 18","Won 2022 Valero Texas Open","Has spoken openly about his struggles with anxiety","One of the most inspiring stories in golf"], sgData: { total: 0.756, totalR: 29, offTee: 0.302, offTeeR: 38, approach: 0.762, approachR: 3, aroundGreen: 0.203, aroundGreenR: 42, putting: -0.511, puttingR: 150 }, topFinishes: "2 PGA Tour wins, 1 major", usOpenHistory: [{ year: 2025, finish: "Won" },{ year: 2024, finish: "CUT" }] },
-  "Jacob Bridgeman": { country: "USA", age: 25, hometown: "Inman, SC", turnedPro: 2022, college: "Clemson", funFacts: ["3-time All-American at Clemson","Won 2023 Korn Ferry Tour event","Missed cut at 2025 US Open","Known for his consistency and poise"], sgData: { total: 1.026, totalR: 13, offTee: 0.085, offTeeR: 66, approach: 0.331, approachR: 37, aroundGreen: -0.119, aroundGreenR: 112, putting: 0.729, puttingR: 3 }, topFinishes: "No PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "CUT" }] },
-  "Ryan Gerard": { country: "USA", age: 26, hometown: "Charlotte, NC", turnedPro: 2022, college: "North Carolina", funFacts: ["Tar Heel alum","Earned PGA Tour card through Korn Ferry Tour","One of the bright young Americans on tour","Solid ball-striker with good course management"], sgData: { total: 0.835, totalR: 22, offTee: 0.111, offTeeR: 62, approach: 0.673, approachR: 7, aroundGreen: -0.316, aroundGreenR: 145, putting: 0.367, puttingR: 27 }, topFinishes: "No PGA Tour wins", usOpenHistory: [] },
-  "Alex Fitzpatrick": { country: "England", age: 27, hometown: "Sheffield, England", turnedPro: 2022, college: "Wake Forest", funFacts: ["Brother of US Open champion Matt Fitzpatrick","Played college golf at Wake Forest","Both brothers competing in the same US Open fields","Trying to follow in his older brother's footsteps"], sgData: { total: 0.20, offTee: 0.08, approach: 0.08, aroundGreen: 0.02, putting: 0.02 }, topFinishes: "No PGA Tour wins", usOpenHistory: [] },
-  "Sungjae Im": { country: "South Korea", age: 28, hometown: "Cheonan, South Korea", turnedPro: 2017, college: "None", funFacts: ["2019 PGA Tour Rookie of the Year","Known as 'Iron Man' for playing nearly every event","T57 at 2025 US Open","Represented South Korea in Olympics"], sgData: { total: 0.162, totalR: 70, offTee: 0.108, offTeeR: 63, approach: -0.549, approachR: 146, aroundGreen: 0.385, aroundGreenR: 13, putting: 0.218, puttingR: 49 }, topFinishes: "4 PGA Tour wins", usOpenHistory: [{ year: 2025, finish: "T57" },{ year: 2024, finish: "CUT" },{ year: 2023, finish: "T56" }] },
-  "Harry Hall": { country: "England", age: 28, hometown: "Cornwall, England", turnedPro: 2020, college: "UNLV", funFacts: ["From Cornwall in southwest England","Played college golf at UNLV","Won 2024 Farmers Insurance Open","Rising star on the PGA Tour"], sgData: { total: 0.355, totalR: 60, offTee: -0.32, offTeeR: 134, approach: 0.004, approachR: 89, aroundGreen: 0.403, aroundGreenR: 11, putting: 0.268, puttingR: 41 }, topFinishes: "1 PGA Tour win", usOpenHistory: [{ year: 2024, finish: "CUT" }] },
-  "Sahith Theegala": { country: "USA", age: 28, hometown: "Chino Hills, CA", turnedPro: 2020, college: "Pepperdine", funFacts: ["2020 Haskins Award winner","Known for his socks and sneakers on course","Has Indian heritage","Fan favorite for his exuberant celebrations"], sgData: { total: 0.436, totalR: 51, offTee: -0.152, offTeeR: 110, approach: 0.113, approachR: 73, aroundGreen: 0.37, aroundGreenR: 14, putting: 0.106, puttingR: 66 }, topFinishes: "2 PGA Tour wins", usOpenHistory: [{ year: 2024, finish: "T52" },{ year: 2023, finish: "T8" }] }
+  "Scottie Scheffler": {
+    country: "USA", age: 30, hometown: "Dallas, TX", turnedPro: 2018, college: "University of Texas",
+    topFinishes: "Multiple-time PGA Tour Player of the Year. 2022 and 2024 Masters champion. 14+ PGA Tour wins. World No. 1 for over 100 consecutive weeks.",
+    openHistory: [{year:2022,finish:"T21"},{year:2023,finish:"T2"},{year:2024,finish:"T7"},{year:2025,finish:"T5"}],
+    funFacts: [
+      "Held the World No. 1 ranking for over 100 consecutive weeks entering 2026",
+      "Won four consecutive PGA Tour starts during his historic 2024 season",
+      "Became a father right before the 2024 PGA Championship and still contended",
+      "Won the 2018 NCAA Individual Championship while at the University of Texas"
+    ],
+    sgData: { total: 2.154, totalR: 1, offTee: 0.652, offTeeR: 4, approach: 0.545, approachR: 13, aroundGreen: 0.458, aroundGreenR: 5, putting: 0.5, puttingR: 14 }
+  },
+  "Rory McIlroy": {
+    country: "Northern Ireland", age: 37, hometown: "Holywood, Northern Ireland", turnedPro: 2007, college: "None",
+    topFinishes: "4 major championships including the 2014 Open. 25+ PGA Tour wins. 2x FedEx Cup champion. Multiple Race to Dubai titles.",
+    openHistory: [{year:2010,finish:"T3"},{year:2014,finish:"Won"},{year:2018,finish:"T2"},{year:2019,finish:"MC"},{year:2022,finish:"T3"},{year:2023,finish:"T6"},{year:2024,finish:"T4"},{year:2025,finish:"T8"}],
+    funFacts: [
+      "Won The Open Championship at Royal Liverpool in 2014 by two strokes",
+      "Shot a legendary 61 at Royal Portrush as a 16-year-old, setting the course record",
+      "Has seven top-5 finishes at The Open, more than any active player",
+      "Still chasing a 5th major to complete the career Grand Slam - his last major win came in 2014"
+    ],
+    sgData: { total: 1.73, totalR: 2, offTee: 0.922, offTeeR: 1, approach: 0.396, approachR: 30, aroundGreen: 0.115, aroundGreenR: 53, putting: 0.297, puttingR: 36 }
+  },
+  "Matt Fitzpatrick": {
+    country: "England", age: 31, hometown: "Sheffield, England", turnedPro: 2014, college: "Northwestern",
+    topFinishes: "2022 U.S. Open champion. 8 DP World Tour wins. 2013 U.S. Amateur champion at The Country Club.",
+    openHistory: [{year:2019,finish:"T44"},{year:2021,finish:"T14"},{year:2022,finish:"T5"},{year:2023,finish:"T22"},{year:2024,finish:"MC"}],
+    funFacts: [
+      "Won the 2013 U.S. Amateur and 2022 U.S. Open at the same venue - The Country Club in Brookline",
+      "Brother Alex Fitzpatrick also plays professional golf",
+      "Ranked No. 1 in strokes gained approach on the PGA Tour",
+      "One of the most accurate iron players in the history of professional golf"
+    ],
+    sgData: { total: 1.642, totalR: 3, offTee: 0.256, offTeeR: 41, approach: 0.846, approachR: 1, aroundGreen: 0.533, aroundGreenR: 1, putting: 0.007, puttingR: 84 }
+  },
+  "Tommy Fleetwood": {
+    country: "England", age: 35, hometown: "Southport, England", turnedPro: 2010, college: "None",
+    topFinishes: "6 DP World Tour wins. Multiple top-5 major finishes. 2019 Open Championship runner-up. 2018 Ryder Cup star.",
+    openHistory: [{year:2017,finish:"T12"},{year:2018,finish:"T12"},{year:2019,finish:"T2"},{year:2022,finish:"T4"},{year:2023,finish:"T8"},{year:2024,finish:"T25"},{year:2025,finish:"T12"}],
+    funFacts: [
+      "Grew up in Southport, just minutes from Royal Birkdale - an Open Championship venue",
+      "Finished runner-up at the 2019 Open at Royal Portrush, one shot back",
+      "Shot a record-tying 63 at the 2018 U.S. Open at Shinnecock Hills",
+      "Known for his flowing hair and exceptional links golf pedigree"
+    ],
+    sgData: { total: 1.421, totalR: 4, offTee: 0.446, offTeeR: 20, approach: 0.326, approachR: 42, aroundGreen: 0.522, aroundGreenR: 3, putting: 0.127, puttingR: 61 }
+  },
+  "Shane Lowry": {
+    country: "Ireland", age: 39, hometown: "Clara, County Offaly, Ireland", turnedPro: 2009, college: "None",
+    topFinishes: "2019 Open champion at Royal Portrush. 2009 Irish Open winner as an amateur. 5+ DP World Tour wins.",
+    openHistory: [{year:2019,finish:"Won"},{year:2022,finish:"T33"},{year:2023,finish:"T12"},{year:2024,finish:"T9"},{year:2025,finish:"T15"}],
+    funFacts: [
+      "Won The Open at Royal Portrush in 2019 with an emotional victory in front of 200,000+ Irish fans",
+      "Won the 2009 Irish Open as an amateur - only the third amateur to win a European Tour event",
+      "Known as one of the best wedge players and links golfers in the world",
+      "His Open victory at Portrush was the first Open in Northern Ireland since 1951"
+    ],
+    sgData: { total: 0.72, totalR: 29, offTee: 0.215, offTeeR: 47, approach: 0.49, approachR: 18, aroundGreen: -0.075, aroundGreenR: 98, putting: 0.091, puttingR: 67 }
+  },
+  "Joaquin Niemann": {
+    country: "Chile", age: 27, hometown: "Santiago, Chile", turnedPro: 2018, college: "None",
+    topFinishes: "2 PGA Tour wins. Youngest player to earn PGA Tour card through Korn Ferry Tour. Multiple LIV Golf wins.",
+    openHistory: [{year:2019,finish:"MC"},{year:2021,finish:"T32"},{year:2022,finish:"T24"}],
+    funFacts: [
+      "Became the youngest player to earn a PGA Tour card through the Korn Ferry Tour at age 19",
+      "Was the top-ranked amateur golfer in the world before turning professional",
+      "Chilean golf prodigy who was breaking national records as a teenager",
+      "Joined LIV Golf in 2022 and has been one of the league's most consistent performers"
+    ],
+    sgData: null,
+    noSgReason: "LIV Golf player — PGA Tour strokes gained stats not available."
+  },
+  "Cameron Smith": {
+    country: "Australia", age: 32, hometown: "Brisbane, Australia", turnedPro: 2013, college: "None",
+    topFinishes: "2022 Open champion at St Andrews. 2022 Players Championship winner. 6 PGA Tour wins.",
+    openHistory: [{year:2022,finish:"Won"},{year:2023,finish:"T33"}],
+    funFacts: [
+      "Won the 2022 Open Championship at St Andrews with a stunning final-round 64",
+      "Famous for his iconic mullet hairstyle that became a fan favorite",
+      "Joined LIV Golf shortly after his Open Championship victory in 2022",
+      "Regarded as one of the best putters in professional golf history"
+    ],
+    sgData: null,
+    noSgReason: "LIV Golf player — PGA Tour strokes gained stats not available."
+  },
+  "Ludvig Aberg": {
+    country: "Sweden", age: 25, hometown: "Eslov, Sweden", turnedPro: 2023, college: "Texas Tech",
+    topFinishes: "2024 PGA Tour Rookie of the Year. Multiple top-5 major finishes. Fastest player to reach world top 10.",
+    openHistory: [{year:2024,finish:"T22"},{year:2025,finish:"T9"}],
+    funFacts: [
+      "Fastest player in golf history to reach the world top 10 after turning professional",
+      "Won the 2023 European Masters in just his sixth professional start",
+      "Former Texas Tech Red Raider and 2023 NCAA individual champion",
+      "Named after composer Ludwig van Beethoven by his music-loving parents"
+    ],
+    sgData: { total: 1.277, totalR: 7, offTee: 0.451, offTeeR: 19, approach: 0.559, approachR: 12, aroundGreen: 0.137, aroundGreenR: 49, putting: 0.13, puttingR: 59 }
+  },
+  "Wyndham Clark": {
+    country: "USA", age: 32, hometown: "Denver, CO", turnedPro: 2017, college: "Oregon",
+    topFinishes: "2023 U.S. Open champion. 3 PGA Tour wins.",
+    openHistory: [{year:2023,finish:"MC"},{year:2024,finish:"T20"}],
+    funFacts: [
+      "Won the 2023 U.S. Open at Los Angeles Country Club for his first major title",
+      "Lost his mother to breast cancer as a teenager, which fuels his motivation",
+      "Known for his athletic build - one of the most physically fit players on tour",
+      "Former University of Oregon standout who nearly chose a career in football"
+    ],
+    sgData: { total: 1.271, totalR: 8, offTee: -0.011, offTeeR: 88, approach: 0.494, approachR: 17, aroundGreen: 0.362, aroundGreenR: 13, putting: 0.426, puttingR: 21 }
+  },
+  "Min Woo Lee": {
+    country: "Australia", age: 28, hometown: "Perth, Australia", turnedPro: 2019, college: "None",
+    topFinishes: "3 DP World Tour wins. 2021 Scottish Open champion. 2024 Australian Open winner.",
+    openHistory: [{year:2021,finish:"T17"},{year:2022,finish:"T41"},{year:2023,finish:"T14"},{year:2024,finish:"T16"}],
+    funFacts: [
+      "His sister Minjee Lee is a major championship winner on the LPGA Tour",
+      "Won the 2021 Scottish Open at The Renaissance Club on a links-style course",
+      "Known for his flair, excitement, and attacking style of play",
+      "One of Australia's most talented young golf exports since Adam Scott"
+    ],
+    sgData: { total: 1.041, totalR: 13, offTee: 0.556, offTeeR: 11, approach: 0.192, approachR: 63, aroundGreen: 0.241, aroundGreenR: 29, putting: 0.052, puttingR: 75 }
+  },
+  "Nicolai Hojgaard": {
+    country: "Denmark", age: 25, hometown: "Billund, Denmark", turnedPro: 2019, college: "None",
+    topFinishes: "3 DP World Tour wins. 2024 DP World Tour Championship winner. Rising European star.",
+    openHistory: [{year:2022,finish:"T21"},{year:2023,finish:"T57"},{year:2024,finish:"T28"}],
+    funFacts: [
+      "Identical twin brother of fellow professional golfer Rasmus Hojgaard",
+      "Won the prestigious 2024 DP World Tour Championship in Dubai",
+      "Both twins turned professional in 2019 and have won multiple tour events",
+      "From Billund, Denmark - the hometown of LEGO"
+    ],
+    sgData: { total: 0.932, totalR: 18, offTee: 0.256, offTeeR: 41, approach: 0.417, approachR: 26, aroundGreen: 0.156, aroundGreenR: 43, putting: 0.104, puttingR: 65 }
+  },
+  "Rasmus Hojgaard": {
+    country: "Denmark", age: 25, hometown: "Billund, Denmark", turnedPro: 2019, college: "None",
+    topFinishes: "4 DP World Tour wins. Won the 2020 Mauritius Open at age 19. Multiple European victories.",
+    openHistory: [{year:2022,finish:"T33"},{year:2023,finish:"T22"},{year:2024,finish:"T19"}],
+    funFacts: [
+      "Identical twin brother of Nicolai Hojgaard - they are among the few twin siblings on tour",
+      "Won his first DP World Tour event at just 19 years old in Mauritius",
+      "The brothers have a combined 7+ professional victories between them",
+      "Known for his aggressive, attacking style that contrasts with his calm demeanor"
+    ],
+    sgData: { total: 0.426, totalR: 49, offTee: 0.273, offTeeR: 39, approach: -0.014, approachR: 97, aroundGreen: -0.139, aroundGreenR: 117, putting: 0.306, puttingR: 35 }
+  },
+  "Cameron Young": {
+    country: "USA", age: 28, hometown: "Scarborough, NY", turnedPro: 2019, college: "Wake Forest",
+    topFinishes: "2022 PGA Tour Rookie of the Year. 2024 first PGA Tour victory. Famous T2 at 2022 Open.",
+    openHistory: [{year:2022,finish:"T2"},{year:2023,finish:"T45"},{year:2024,finish:"MC"}],
+    funFacts: [
+      "Finished runner-up at the 2022 Open at St Andrews, one shot behind Cameron Smith",
+      "Son of PGA professional David Young, who taught him the game from childhood",
+      "Known for his prodigious length off the tee - one of the longest hitters on tour",
+      "Was the 2022 PGA Tour Rookie of the Year after multiple near-wins"
+    ],
+    sgData: { total: 1.173, totalR: 10, offTee: 0.548, offTeeR: 12, approach: 0.421, approachR: 25, aroundGreen: 0.223, aroundGreenR: 32, putting: -0.019, puttingR: 85 }
+  },
+  "Jordan Spieth": {
+    country: "USA", age: 32, hometown: "Dallas, TX", turnedPro: 2012, college: "University of Texas (1 year)",
+    topFinishes: "3 major championships. 2017 Open champion. 2015 Masters and U.S. Open. 13 PGA Tour wins.",
+    openHistory: [{year:2017,finish:"Won"},{year:2018,finish:"T9"},{year:2019,finish:"T31"},{year:2021,finish:"T39"},{year:2022,finish:"T12"},{year:2023,finish:"MC"},{year:2024,finish:"MC"}],
+    funFacts: [
+      "Won The Open at Royal Birkdale in 2017 after a dramatic final-round recovery from a bogey on 13",
+      "Youngest Masters champion since Tiger Woods when he won at age 21 in 2015",
+      "Part of the celebrated young trio with Justin Thomas and Rickie Fowler from junior golf days",
+      "Known for his creative short game, daring course management, and clutch putting"
+    ],
+    sgData: { total: 0.322, totalR: 60, offTee: 0.075, offTeeR: 73, approach: 0.085, approachR: 83, aroundGreen: -0.003, aroundGreenR: 85, putting: 0.164, puttingR: 53 }
+  },
+  "Alex Smalley": {
+    country: "USA", age: 28, hometown: "Wake Forest, NC", turnedPro: 2020, college: "Duke",
+    topFinishes: "2023 RSM Classic winner. PGA Tour regular since 2022.",
+    openHistory: [],
+    funFacts: [
+      "Won the 2023 RSM Classic for his first PGA Tour title at Sea Island",
+      "Former Duke Blue Devil and standout collegiate player",
+      "Despite growing up in Wake Forest, NC, he chose to play for rival Duke",
+      "Known for his consistent ball-striking and steady approach to tournament golf"
+    ],
+    sgData: { total: 0.69, totalR: 35, offTee: 0.109, offTeeR: 64, approach: 0.31, approachR: 48, aroundGreen: -0.016, aroundGreenR: 88, putting: 0.287, puttingR: 39 }
+  },
+  "Jon Rahm": {
+    country: "Spain", age: 31, hometown: "Barrika, Basque Country, Spain", turnedPro: 2016, college: "Arizona State",
+    topFinishes: "2 major championships. 2023 Masters champion. 2021 U.S. Open champion. Former World No. 1.",
+    openHistory: [{year:2019,finish:"T11"},{year:2021,finish:"T3"},{year:2022,finish:"T3"},{year:2023,finish:"T7"},{year:2024,finish:"T7"}],
+    funFacts: [
+      "Joined LIV Golf in December 2023 for a reported $300+ million deal",
+      "Won the 2023 Masters by four shots with a dominant wire-to-wire victory at Augusta",
+      "Born in the Basque region of Spain and played college golf at Arizona State",
+      "Held the World No. 1 ranking for over 50 cumulative weeks"
+    ],
+    sgData: null,
+    noSgReason: "LIV Golf player — PGA Tour strokes gained stats not available."
+  },
+  "Brooks Koepka": {
+    country: "USA", age: 36, hometown: "West Palm Beach, FL", turnedPro: 2012, college: "Florida State",
+    topFinishes: "5 major championships. 2x U.S. Open (2017-18). 3x PGA Championship (2018-19, 2023). LIV Golf competitor.",
+    openHistory: [{year:2019,finish:"T4"},{year:2022,finish:"T26"},{year:2023,finish:"T6"},{year:2024,finish:"T30"}],
+    funFacts: [
+      "Won five majors including back-to-back U.S. Opens in 2017 and 2018",
+      "Known for his intense focus and remarkable ability to peak at major championships",
+      "Played on the European Challenge Tour before breaking through on the PGA Tour",
+      "One of the most dominant major championship performers of his generation"
+    ],
+    sgData: { total: 0.733, totalR: 28, offTee: 0.183, offTeeR: 49, approach: 0.606, approachR: 8, aroundGreen: 0.143, aroundGreenR: 46, putting: -0.199, puttingR: 114 }
+  },
+  "Gary Woodland": {
+    country: "USA", age: 42, hometown: "Topeka, KS", turnedPro: 2007, college: "Washburn / Kansas",
+    topFinishes: "2019 U.S. Open champion at Pebble Beach. 4 PGA Tour wins.",
+    openHistory: [{year:2019,finish:"T19"},{year:2022,finish:"MC"}],
+    funFacts: [
+      "Won the 2019 U.S. Open at Pebble Beach with a brilliant final round performance",
+      "Was a star basketball player in college before committing fully to golf",
+      "Overcame surgery for a brain lesion discovered in 2023 and returned to competition",
+      "Known for his incredible athleticism and power - one of the longest hitters on tour"
+    ],
+    sgData: { total: 0.477, totalR: 47, offTee: 0.634, offTeeR: 5, approach: 0.08, approachR: 85, aroundGreen: -0.371, aroundGreenR: 149, putting: 0.134, puttingR: 58 }
+  },
+  "Brian Harman": {
+    country: "USA", age: 39, hometown: "Savannah, GA", turnedPro: 2010, college: "Georgia",
+    topFinishes: "2023 Open champion at Royal Liverpool. 3 PGA Tour wins. Left-handed player.",
+    openHistory: [{year:2023,finish:"Won"},{year:2024,finish:"T14"}],
+    funFacts: [
+      "Won the 2023 Open Championship at Royal Liverpool by six strokes - one of the largest margins in modern Open history",
+      "One of the few left-handed players competing on the PGA Tour",
+      "Former University of Georgia standout and four-time All-American",
+      "His dominant Open win stunned the golf world as he entered as a relative longshot"
+    ],
+    sgData: { total: -0.02, totalR: 95, offTee: -0.29, offTeeR: 129, approach: 0.173, approachR: 67, aroundGreen: 0.062, aroundGreenR: 67, putting: 0.034, puttingR: 79 }
+  },
+  "Robert MacIntyre": {
+    country: "Scotland", age: 29, hometown: "Oban, Scotland", turnedPro: 2017, college: "None",
+    topFinishes: "2024 RBC Canadian Open winner. 2024 Genesis Scottish Open winner. Multiple DP World Tour wins. Scotland's top-ranked golfer.",
+    openHistory: [{year:2019,finish:"T6"},{year:2021,finish:"T26"},{year:2022,finish:"T47"},{year:2023,finish:"T31"},{year:2024,finish:"T23"},{year:2025,finish:"T11"}],
+    funFacts: [
+      "Made a stunning Open Championship debut with a T6 finish at Royal Portrush in 2019",
+      "Known as 'Bob Mac' - grew up in the Scottish Highlands town of Oban",
+      "A left-handed golfer with exceptional links golf skills honed on Scottish seaside courses",
+      "Scotland's highest-ranked golfer and a proud flag-bearer for Scottish golf"
+    ],
+    sgData: { total: 0.991, totalR: 14, offTee: 0.446, offTeeR: 20, approach: -0.041, approachR: 102, aroundGreen: 0.043, aroundGreenR: 72, putting: 0.544, puttingR: 9 }
+  },
+  "Alex Fitzpatrick": {
+    country: "England", age: 26, hometown: "Sheffield, England", turnedPro: 2022, college: "Wake Forest",
+    topFinishes: "Multiple Challenge Tour and DP World Tour appearances. 2022 Open Championship competitor.",
+    openHistory: [{year:2022,finish:"T31"}],
+    funFacts: [
+      "Younger brother of major champion Matt Fitzpatrick",
+      "Competed at the 2022 Open at St Andrews alongside his brother Matt",
+      "Former Wake Forest standout who followed a different college path than Matt (Northwestern)",
+      "Working to establish himself on the DP World Tour following in his brother's footsteps"
+    ],
+    sgData: null,
+    noSgReason: "DP World Tour player — PGA Tour strokes gained stats not available."
+  },
+  "Justin Rose": {
+    country: "England", age: 45, hometown: "Johannesburg, South Africa (raised in England)", turnedPro: 1998, college: "None",
+    topFinishes: "2013 U.S. Open champion. 2018 FedEx Cup champion. 11 PGA Tour wins. 2016 Olympic gold medalist.",
+    openHistory: [{year:1998,finish:"T4 (amateur)"},{year:2018,finish:"T2"},{year:2019,finish:"T21"},{year:2022,finish:"T52"},{year:2023,finish:"T60"}],
+    funFacts: [
+      "Finished T4 at The Open as a 17-year-old amateur in 1998 at Royal Birkdale, capturing the world's attention",
+      "Won Olympic gold in golf at the 2016 Rio de Janeiro Games",
+      "Born in South Africa but has represented England throughout his career",
+      "One of the most consistent and respected players in major championship history"
+    ],
+    sgData: { total: 0.544, totalR: 41, offTee: -0.034, offTeeR: 91, approach: 0.495, approachR: 16, aroundGreen: 0.009, aroundGreenR: 80, putting: 0.073, puttingR: 71 }
+  },
+  "Jason Day": {
+    country: "Australia", age: 38, hometown: "Beaudesert, Queensland, Australia", turnedPro: 2006, college: "None",
+    topFinishes: "2015 PGA Championship winner. 13 PGA Tour wins. Former World No. 1 for 51 weeks.",
+    openHistory: [{year:2015,finish:"T4"},{year:2016,finish:"T22"},{year:2017,finish:"T24"},{year:2019,finish:"T8"}],
+    funFacts: [
+      "Held the World No. 1 ranking for 51 consecutive weeks in 2015-2016",
+      "Born in Australia to a Filipino mother and Australian father",
+      "Overcame a very challenging childhood including his father's passing to reach the top of golf",
+      "Known for his exceptional short game - ranked among the best around the green on tour"
+    ],
+    sgData: { total: -0.038, totalR: 99, offTee: -0.075, offTeeR: 102, approach: -0.628, approachR: 147, aroundGreen: 0.506, aroundGreenR: 4, putting: 0.159, puttingR: 55 }
+  },
+  "Viktor Hovland": {
+    country: "Norway", age: 28, hometown: "Oslo, Norway", turnedPro: 2019, college: "Oklahoma State",
+    topFinishes: "7 PGA Tour wins. 2023 FedEx Cup champion. Multiple DP World Tour wins. First Norwegian PGA Tour winner.",
+    openHistory: [{year:2019,finish:"T25"},{year:2021,finish:"T12"},{year:2022,finish:"T4"},{year:2023,finish:"T4"},{year:2024,finish:"T16"}],
+    funFacts: [
+      "First Norwegian to win on the PGA Tour, blazing a trail for Scandinavian golf",
+      "Won the 2019 U.S. Amateur - the first Norwegian to win a USGA championship",
+      "Known for his infectious smile, positive attitude, and entertaining personality",
+      "Posted two consecutive top-4 finishes at The Open in 2022 and 2023"
+    ],
+    sgData: { total: 0.824, totalR: 22, offTee: 0.055, offTeeR: 77, approach: 0.507, approachR: 15, aroundGreen: 0.216, aroundGreenR: 36, putting: 0.045, puttingR: 77 }
+  },
+  "Xander Schauffele": {
+    country: "USA", age: 32, hometown: "San Diego, CA", turnedPro: 2015, college: "San Diego State",
+    topFinishes: "2024 Open champion. 2024 PGA Championship winner. 2020 Olympic gold medalist. 10+ PGA Tour wins.",
+    openHistory: [{year:2018,finish:"T2"},{year:2019,finish:"T5"},{year:2021,finish:"T3"},{year:2022,finish:"T6"},{year:2023,finish:"T24"},{year:2024,finish:"Won"},{year:2025,finish:"T6"}],
+    funFacts: [
+      "Won the 2024 Open Championship at Royal Troon for his second major of the season",
+      "Also won the 2024 PGA Championship at Valhalla, completing a remarkable double",
+      "Won Olympic gold at the 2020 Tokyo Games for the United States",
+      "Father Stefan was a decathlete who emigrated from Germany and also serves as his coach"
+    ],
+    sgData: { total: 0.958, totalR: 15, offTee: 0.494, offTeeR: 16, approach: 0.245, approachR: 59, aroundGreen: 0.056, aroundGreenR: 68, putting: 0.164, puttingR: 53 }
+  },
+  "Sepp Straka": {
+    country: "Austria", age: 33, hometown: "Vienna, Austria (raised in USA)", turnedPro: 2016, college: "Georgia",
+    topFinishes: "2 PGA Tour wins. 2022 Honda Classic champion. First Austrian to win on the PGA Tour.",
+    openHistory: [{year:2022,finish:"MC"},{year:2023,finish:"T8"},{year:2024,finish:"MC"}],
+    funFacts: [
+      "Born in Vienna, Austria but moved to the United States as a teenager",
+      "Holds dual Austrian-American citizenship and represents Austria internationally",
+      "Had a breakthrough T8 finish at the 2023 Open Championship at Royal Liverpool",
+      "Played college golf at the University of Georgia alongside Harris English"
+    ],
+    sgData: { total: -0.073, totalR: 106, offTee: -0.04, offTeeR: 93, approach: 0.259, approachR: 55, aroundGreen: -0.197, aroundGreenR: 125, putting: -0.096, puttingR: 100 }
+  },
+  "Russell Henley": {
+    country: "USA", age: 37, hometown: "Macon, GA", turnedPro: 2011, college: "Georgia",
+    topFinishes: "3 PGA Tour wins. Won the 2013 Sony Open in his PGA Tour debut. Consistent top performer.",
+    openHistory: [{year:2019,finish:"MC"},{year:2022,finish:"T45"},{year:2024,finish:"T43"}],
+    funFacts: [
+      "Won the 2013 Sony Open in Hawaii in his very first PGA Tour start as a professional",
+      "College teammate of Harris English at the University of Georgia",
+      "Known as one of the steadiest and most reliable players on the PGA Tour",
+      "Has quietly been one of the best ball-strikers on tour for over a decade"
+    ],
+    sgData: { total: 0.909, totalR: 19, offTee: 0.286, offTeeR: 37, approach: 0.271, approachR: 54, aroundGreen: 0.002, aroundGreenR: 83, putting: 0.35, puttingR: 31 }
+  },
+  "Chris Gotterup": {
+    country: "USA", age: 27, hometown: "Little Silver, NJ", turnedPro: 2022, college: "Oklahoma",
+    topFinishes: "2024 Myrtle Beach Classic winner. 2022 Haskins Award winner as best collegiate golfer.",
+    openHistory: [],
+    funFacts: [
+      "Won the 2022 Haskins Award as the outstanding collegiate golfer in America",
+      "Transferred from Rutgers to Oklahoma where he became a collegiate star",
+      "Known for his explosive power and aggressive playing style off the tee",
+      "One of the rising young stars on the PGA Tour from the New Jersey area"
+    ],
+    sgData: { total: 1.248, totalR: 9, offTee: 0.573, offTeeR: 10, approach: 0.313, approachR: 46, aroundGreen: -0.014, aroundGreenR: 87, putting: 0.376, puttingR: 27 }
+  },
+  "Tom Kim": {
+    country: "South Korea", age: 24, hometown: "Seoul, South Korea", turnedPro: 2019, college: "None",
+    topFinishes: "3 PGA Tour wins. Youngest Shriners Children's Open winner. Rising international star.",
+    openHistory: [{year:2023,finish:"T22"},{year:2024,finish:"T34"}],
+    funFacts: [
+      "Real name is Kim Joo-hyung - goes by Tom Kim on the PGA Tour",
+      "Won his first PGA Tour event at just 20 years old at the 2022 Shriners",
+      "Known for his energetic celebrations, charismatic personality, and fist pumps",
+      "One of the most talented young players in the world, representing South Korea"
+    ],
+    sgData: { total: 0.758, totalR: 26, offTee: -0.058, offTeeR: 99, approach: 0.656, approachR: 5, aroundGreen: 0.219, aroundGreenR: 34, putting: -0.059, puttingR: 94 }
+  },
+  "Tyrrell Hatton": {
+    country: "England", age: 34, hometown: "Marlow, England", turnedPro: 2011, college: "None",
+    topFinishes: "6 DP World Tour wins. 2020 Arnold Palmer Invitational winner. Multiple Ryder Cup appearances.",
+    openHistory: [{year:2016,finish:"T5"},{year:2017,finish:"T28"},{year:2019,finish:"T9"},{year:2021,finish:"T4"},{year:2023,finish:"T8"},{year:2024,finish:"T18"}],
+    funFacts: [
+      "Known for wearing a hoodie on the golf course - a distinctive style choice",
+      "Won the Alfred Dunhill Links Championship four times (2016, 2017, 2020, 2021)",
+      "Famous for his emotional and passionate on-course reactions to bad shots",
+      "Joined LIV Golf and has continued to compete in major championships"
+    ],
+    sgData: null,
+    noSgReason: "LIV Golf player — PGA Tour strokes gained stats not available."
+  },
+  "Patrick Cantlay": {
+    country: "USA", age: 34, hometown: "Long Beach, CA", turnedPro: 2012, college: "UCLA",
+    topFinishes: "2021 FedEx Cup champion. 8 PGA Tour wins. 2020 Memorial Tournament winner.",
+    openHistory: [{year:2019,finish:"T24"},{year:2022,finish:"T30"},{year:2023,finish:"T45"},{year:2024,finish:"T21"}],
+    funFacts: [
+      "Won the 2021 FedEx Cup with victories at the BMW Championship and Tour Championship",
+      "Known for his deliberate playing pace, earning the nickname 'Patty Ice'",
+      "Set the NCAA single-round scoring record with a 60 while playing at UCLA",
+      "Overcame a serious back injury that sidelined him early in his professional career"
+    ],
+    sgData: { total: 0.933, totalR: 17, offTee: 0.361, offTeeR: 29, approach: 0.375, approachR: 32, aroundGreen: 0.24, aroundGreenR: 30, putting: -0.043, puttingR: 90 }
+  },
+  "Kurt Kitayama": {
+    country: "USA", age: 33, hometown: "Chico, CA", turnedPro: 2015, college: "UNLV",
+    topFinishes: "2023 Arnold Palmer Invitational winner. 3 international wins across European and Asian Tours.",
+    openHistory: [{year:2023,finish:"T14"},{year:2024,finish:"T33"}],
+    funFacts: [
+      "Won the 2023 Arnold Palmer Invitational at Bay Hill for his first PGA Tour title",
+      "Built his career playing extensively on the European and Asian Tours before the PGA Tour",
+      "Of Japanese-American heritage - his family roots trace back to Japan",
+      "Won three times internationally before achieving his PGA Tour breakthrough"
+    ],
+    sgData: { total: 0.717, totalR: 30, offTee: 0.309, offTeeR: 32, approach: 0.6, approachR: 10, aroundGreen: -0.071, aroundGreenR: 96, putting: -0.121, puttingR: 104 }
+  },
+  "Patrick Reed": {
+    country: "USA", age: 35, hometown: "Houston, TX", turnedPro: 2011, college: "Augusta University",
+    topFinishes: "2018 Masters champion. 9 PGA Tour wins. Dominant Ryder Cup performer.",
+    openHistory: [{year:2018,finish:"T13"},{year:2019,finish:"T47"},{year:2022,finish:"T29"},{year:2023,finish:"T38"}],
+    funFacts: [
+      "Won the 2018 Masters at Augusta National with a gutsy final-round performance",
+      "Earned the nickname 'Captain America' for his fierce Ryder Cup performances",
+      "One of the most polarizing and competitive figures in professional golf",
+      "Joined LIV Golf in 2022 and has remained a major championship contender"
+    ],
+    sgData: null,
+    noSgReason: "LIV Golf player — PGA Tour strokes gained stats not available."
+  },
+  "Collin Morikawa": {
+    country: "USA", age: 29, hometown: "La Canada Flintridge, CA", turnedPro: 2019, college: "Cal Berkeley",
+    topFinishes: "2 major championships. 2021 Open champion. 2020 PGA Championship winner. 6 PGA Tour wins.",
+    openHistory: [{year:2021,finish:"Won"},{year:2022,finish:"T8"},{year:2023,finish:"T57"},{year:2024,finish:"T14"}],
+    funFacts: [
+      "Won The Open Championship on his debut in 2021 at Royal St George's - a remarkable achievement",
+      "Made the cut in his first 22 consecutive PGA Tour events as a professional",
+      "Regarded as one of the greatest iron players in the history of golf",
+      "Has dual American-Japanese heritage and is a Cal Berkeley graduate"
+    ],
+    sgData: { total: 1.291, totalR: 6, offTee: 0.402, offTeeR: 25, approach: 0.842, approachR: 2, aroundGreen: 0.009, aroundGreenR: 80, putting: 0.038, puttingR: 78 }
+  },
+  "Hideki Matsuyama": {
+    country: "Japan", age: 34, hometown: "Matsuyama, Ehime, Japan", turnedPro: 2013, college: "Tohoku Fukushi University",
+    topFinishes: "2021 Masters champion. 9+ PGA Tour wins. First Japanese male major champion. 2024 Olympic medalist.",
+    openHistory: [{year:2013,finish:"T6"},{year:2017,finish:"T6"},{year:2021,finish:"T14"},{year:2022,finish:"T14"},{year:2024,finish:"T31"}],
+    funFacts: [
+      "First Japanese male golfer to win a major championship at the 2021 Masters",
+      "Won the 2010 Asia-Pacific Amateur Championship which earned him a Masters invite",
+      "Known for his meticulous and deliberate pre-shot routine on every shot",
+      "Has represented Japan in multiple Olympic Games and Presidents Cup teams"
+    ],
+    sgData: { total: 0.518, totalR: 44, offTee: -0.217, offTeeR: 122, approach: 0.37, approachR: 34, aroundGreen: 0.332, aroundGreenR: 18, putting: 0.033, puttingR: 80 }
+  },
+  "Keegan Bradley": {
+    country: "USA", age: 40, hometown: "Woodstock, VT", turnedPro: 2008, college: "St. John's",
+    topFinishes: "2011 PGA Championship winner. 5 PGA Tour wins. 2025 U.S. Ryder Cup captain.",
+    openHistory: [{year:2012,finish:"T15"},{year:2014,finish:"T24"},{year:2019,finish:"MC"},{year:2024,finish:"T52"}],
+    funFacts: [
+      "Named the 2025 U.S. Ryder Cup captain at Bethpage Black",
+      "Won the 2011 PGA Championship at Atlanta Athletic Club in his rookie PGA Tour season",
+      "Nephew of LPGA Hall of Famer Pat Bradley, a six-time major winner",
+      "Was one of the last players to use an anchored putting stroke before the ban"
+    ],
+    sgData: { total: 0.352, totalR: 56, offTee: 0.074, offTeeR: 75, approach: 0.019, approachR: 93, aroundGreen: 0.316, aroundGreenR: 19, putting: -0.057, puttingR: 93 }
+  },
+  "Ben Griffin": {
+    country: "USA", age: 30, hometown: "Chapel Hill, NC", turnedPro: 2019, college: "North Carolina",
+    topFinishes: "2024 Wyndham Championship winner. PGA Tour regular since 2023.",
+    openHistory: [],
+    funFacts: [
+      "Won the 2024 Wyndham Championship for his maiden PGA Tour victory",
+      "Former North Carolina Tar Heel and ACC standout",
+      "One of the best putters and short-game players on the PGA Tour",
+      "Known for his calm composure and steady, reliable play under pressure"
+    ],
+    sgData: { total: 0.705, totalR: 32, offTee: -0.046, offTeeR: 94, approach: -0.138, approachR: 114, aroundGreen: 0.458, aroundGreenR: 5, putting: 0.432, puttingR: 19 }
+  },
+  "Sahith Theegala": {
+    country: "USA", age: 28, hometown: "Chino Hills, CA", turnedPro: 2020, college: "Pepperdine",
+    topFinishes: "Multiple PGA Tour wins. 2020 Haskins Award winner. Fan favorite on tour.",
+    openHistory: [{year:2023,finish:"T37"},{year:2024,finish:"T12"}],
+    funFacts: [
+      "Won the 2020 Haskins Award as the top collegiate golfer at Pepperdine University",
+      "Indian-American golfer of Telugu heritage, representing growing diversity in golf",
+      "Known for his effortless, smooth swing and calm demeanor under pressure",
+      "One of the most popular and fan-friendly players on the PGA Tour"
+    ],
+    sgData: { total: 0.4, totalR: 52, offTee: -0.11, offTeeR: 107, approach: 0.144, approachR: 70, aroundGreen: 0.304, aroundGreenR: 20, putting: 0.063, puttingR: 72 }
+  },
+  "Harris English": {
+    country: "USA", age: 36, hometown: "Sea Island, GA", turnedPro: 2011, college: "Georgia",
+    topFinishes: "4 PGA Tour wins. 2021 Sentry Tournament of Champions winner. 2013 FedEx St. Jude Classic winner.",
+    openHistory: [{year:2021,finish:"T37"},{year:2022,finish:"MC"}],
+    funFacts: [
+      "Won the 2021 Tournament of Champions in an epic eight-hole playoff against Joaquin Niemann",
+      "College teammate of Russell Henley at the University of Georgia",
+      "Based at Sea Island, Georgia, a well-known hotbed of PGA Tour talent",
+      "Made a remarkable comeback from hip surgery to return to top-level competition"
+    ],
+    sgData: { total: 0.674, totalR: 36, offTee: 0.278, offTeeR: 38, approach: -0.181, approachR: 121, aroundGreen: 0.07, aroundGreenR: 65, putting: 0.507, puttingR: 12 }
+  },
+  "Haotong Li": {
+    country: "China", age: 30, hometown: "Hunan, China", turnedPro: 2011, college: "None",
+    topFinishes: "3 DP World Tour wins. 2017 Open Championship T3. First Chinese player in world top 30.",
+    openHistory: [{year:2017,finish:"T3"},{year:2018,finish:"T17"},{year:2019,finish:"MC"}],
+    funFacts: [
+      "Finished T3 at the 2017 Open Championship at Royal Birkdale at just 21 years old",
+      "Was the first Chinese golfer to break into the world top 30 in rankings",
+      "Known for his powerful long game and length off the tee",
+      "Has won multiple events on the DP World Tour representing China"
+    ],
+    sgData: { total: -0.002, totalR: 91, offTee: 0.414, offTeeR: 24, approach: 0.247, approachR: 58, aroundGreen: -0.508, aroundGreenR: 152, putting: -0.155, puttingR: 108 }
+  },
+  "Maverick McNealy": {
+    country: "USA", age: 30, hometown: "Portola Valley, CA", turnedPro: 2017, college: "Stanford",
+    topFinishes: "Multiple PGA Tour top-10 finishes. Former World No. 1 amateur. Consistent tour performer.",
+    openHistory: [],
+    funFacts: [
+      "Son of Sun Microsystems co-founder Scott McNealy - grew up in Silicon Valley",
+      "Was the No. 1 ranked amateur in the world during his time at Stanford",
+      "Known for being one of the most cerebral and analytical players on tour",
+      "Famously chose not to accept prize money as an amateur to preserve his status"
+    ],
+    sgData: { total: 0.815, totalR: 24, offTee: 0.127, offTeeR: 62, approach: -0.103, approachR: 109, aroundGreen: 0.358, aroundGreenR: 14, putting: 0.432, puttingR: 19 }
+  },
+  "Ryan Gerard": {
+    country: "USA", age: 26, hometown: "Swansea, IL", turnedPro: 2022, college: "North Carolina",
+    topFinishes: "2024 Korn Ferry Tour graduate. Multiple PGA Tour top finishes in debut season.",
+    openHistory: [],
+    funFacts: [
+      "Former North Carolina Tar Heel standout who earned All-American honors",
+      "Known for his aggressive approach play and strong iron game",
+      "One of the newest faces on the PGA Tour after earning his card through Korn Ferry",
+      "Represents the next wave of talented young Americans on the PGA Tour"
+    ],
+    sgData: { total: 0.773, totalR: 25, offTee: 0.189, offTeeR: 48, approach: 0.452, approachR: 21, aroundGreen: -0.208, aroundGreenR: 127, putting: 0.339, puttingR: 32 }
+  },
+  "Rickie Fowler": {
+    country: "USA", age: 37, hometown: "Murrieta, CA", turnedPro: 2009, college: "Oklahoma State",
+    topFinishes: "6 PGA Tour wins. 2023 Rocket Mortgage Classic winner. 5 top-5 major finishes. Fan favorite.",
+    openHistory: [{year:2011,finish:"T5"},{year:2014,finish:"T2"},{year:2017,finish:"T5"},{year:2019,finish:"T9"}],
+    funFacts: [
+      "Finished T2 at the 2014 Open Championship at Royal Liverpool in a thrilling finish",
+      "Known for wearing orange on Sundays as a tribute to alma mater Oklahoma State",
+      "One of the most popular and marketable players in professional golf",
+      "Had a career resurgence in 2023 with his Rocket Mortgage Classic victory after years of struggles"
+    ],
+    sgData: { total: 0.503, totalR: 46, offTee: 0.218, offTeeR: 45, approach: 0.11, approachR: 76, aroundGreen: -0.08, aroundGreenR: 99, putting: 0.256, puttingR: 44 }
+  },
+  "Keith Mitchell": {
+    country: "USA", age: 33, hometown: "Chattanooga, TN", turnedPro: 2015, college: "Georgia",
+    topFinishes: "2019 Honda Classic winner. PGA Tour career victory. Consistent tour player.",
+    openHistory: [],
+    funFacts: [
+      "Won the 2019 Honda Classic at PGA National for his maiden PGA Tour victory",
+      "Consistently ranks among the top players in strokes gained off the tee",
+      "Former University of Georgia standout - part of a strong Bulldog golf pipeline",
+      "Known as one of the longest and most powerful drivers on the PGA Tour"
+    ],
+    sgData: { total: 0.696, totalR: 34, offTee: 0.611, offTeeR: 7, approach: 0.256, approachR: 56, aroundGreen: -0.073, aroundGreenR: 97, putting: -0.098, puttingR: 101 }
+  },
+  "J.J. Spaun": {
+    country: "USA", age: 36, hometown: "San Diego, CA", turnedPro: 2013, college: "San Diego State",
+    topFinishes: "2025 Open champion at Royal Portrush. 2022 Valero Texas Open winner. Cinderella major champion.",
+    openHistory: [{year:2025,finish:"Won"}],
+    funFacts: [
+      "Won the 2025 Open Championship at Royal Portrush for a stunning first major title",
+      "Named J.J. after his father Joseph John - a family tradition",
+      "Won his first PGA Tour event at the 2022 Valero Texas Open",
+      "Ranked in the top 5 in strokes gained approach - one of the best iron players on tour"
+    ],
+    sgData: { total: 0.736, totalR: 27, offTee: 0.244, offTeeR: 44, approach: 0.714, approachR: 4, aroundGreen: 0.106, aroundGreenR: 55, putting: -0.328, puttingR: 128 }
+  },
+  "Max Homa": {
+    country: "USA", age: 35, hometown: "Burbank, CA", turnedPro: 2013, college: "Cal Berkeley",
+    topFinishes: "6 PGA Tour wins. 2023 Genesis Invitational winner. 2023 Farmers Insurance Open winner.",
+    openHistory: [{year:2023,finish:"T4"},{year:2024,finish:"MC"}],
+    funFacts: [
+      "One of the funniest players on social media, famous for roasting fans' golf swings on Twitter",
+      "Had an incredible T4 at his first Open Championship appearance in 2023 at Royal Liverpool",
+      "Close friends with college teammate Collin Morikawa from their Cal Berkeley days",
+      "Worked briefly as a golf instructor before earning his PGA Tour card"
+    ],
+    sgData: { total: 0.149, totalR: 78, offTee: 0.095, offTeeR: 66, approach: -0.177, approachR: 120, aroundGreen: -0.059, aroundGreenR: 95, putting: 0.291, puttingR: 38 }
+  },
+  "Alex Noren": {
+    country: "Sweden", age: 43, hometown: "Stockholm, Sweden", turnedPro: 2005, college: "Oklahoma State",
+    topFinishes: "10 DP World Tour wins. 2018 Open Championship finalist. Multiple Ryder Cup appearances for Europe.",
+    openHistory: [{year:2016,finish:"T5"},{year:2018,finish:"T2"},{year:2022,finish:"T28"},{year:2023,finish:"T6"}],
+    funFacts: [
+      "Finished T2 at the 2018 Open Championship in a playoff at Carnoustie",
+      "Won four DP World Tour events during an incredible 2016 season alone",
+      "Played college golf at Oklahoma State, the same program as Rickie Fowler",
+      "Regarded as one of the best putters in European golf history"
+    ],
+    sgData: { total: 0.342, totalR: 57, offTee: -0.128, offTeeR: 109, approach: -0.164, approachR: 119, aroundGreen: 0.077, aroundGreenR: 61, putting: 0.556, puttingR: 8 }
+  }
 };
 
-let golferMap = {};
-let lastData = null;
+// State
+let espnData = null;
+let competitorMap = {};
 let expandedRows = new Set();
+let currentTab = 'standings';
+let refreshInterval = null;
+let lastUpdate = null;
+let currentRound = 1;
+let cutHappened = false;
+
+function normalizeName(name) {
+  if (!name) return '';
+  return name.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s*\(a\)\s*$/i, '').trim().toLowerCase();
+}
 
 function parseScore(s) {
-  if (s == null || s === '' || s === '-') return null;
+  if (s === null || s === undefined || s === '' || s === '--' || s === 'WD' || s === 'DQ') return null;
+  s = String(s).trim();
   if (s === 'E') return 0;
-  return parseInt(s, 10);
+  const n = parseInt(s, 10);
+  return isNaN(n) ? null : n;
 }
-function formatScore(n) { if (n == null) return '-'; if (n === 0) return 'E'; return n > 0 ? '+'+n : ''+n; }
-function scoreClass(n) { if (n == null) return ''; return n < 0 ? 'score-negative' : n > 0 ? 'score-positive' : 'score-even'; }
-function normalizeName(name) {
-  return name.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z\s.]/g,'').replace(/\s+/g,' ').trim();
+
+function formatScore(n) {
+  if (n === null || n === undefined) return '--';
+  if (n === 0) return 'E';
+  return n > 0 ? '+' + n : String(n);
+}
+
+function scoreClass(n) {
+  if (n === null || n === undefined) return '';
+  if (n < 0) return 'score-under';
+  if (n > 0) return 'score-over';
+  return 'score-even';
+}
+
+function findCompetitor(golferName) {
+  const norm = normalizeName(golferName);
+  return competitorMap[norm] || null;
+}
+
+function buildCompetitorMap(competitors) {
+  competitorMap = {};
+  if (!competitors) return;
+  competitors.forEach(c => {
+    const name = c.athlete ? c.athlete.displayName || c.athlete.fullName || '' : '';
+    const norm = normalizeName(name);
+    if (norm) competitorMap[norm] = c;
+  });
 }
 
 function detectCurrentRound(competitors) {
   let maxRound = 1;
-  for (const c of competitors) {
-    if (c.linescores) for (const ls of c.linescores) if (ls.value != null && ls.period > maxRound) maxRound = ls.period;
-  }
+  if (!competitors) return 1;
+  competitors.forEach(c => {
+    if (c.linescores) {
+      c.linescores.forEach(ls => {
+        if (ls.period && ls.period > maxRound) maxRound = ls.period;
+      });
+    }
+  });
   return maxRound;
 }
 
-function isCutMade(competitor, currentRound) {
-  if (currentRound <= 2) return true;
-  const r = competitor.linescores && competitor.linescores.find(ls => ls.period === currentRound);
-  if (r && (r.value != null || (r.linescores && r.linescores.length > 0))) return true;
-  const r2 = competitor.linescores && competitor.linescores.find(ls => ls.period === 2);
-  if (r2 && r2.value != null) return false;
-  return true;
+function getThru(competitor) {
+  if (!competitor || !competitor.linescores) return '--';
+  const roundData = competitor.linescores.find(ls => ls.period === currentRound);
+  if (!roundData) return '--';
+  if (roundData.linescores && roundData.linescores.length > 0) {
+    const holes = roundData.linescores.length;
+    return holes >= 18 ? 'F' : String(holes);
+  }
+  if (roundData.displayValue && roundData.displayValue !== '--') return 'F';
+  return '--';
 }
 
-async function fetchLeaderboard() {
+function getToday(competitor) {
+  if (!competitor || !competitor.linescores) return '--';
+  const roundData = competitor.linescores.find(ls => ls.period === currentRound);
+  if (!roundData) return '--';
+  return roundData.displayValue || '--';
+}
+
+function getRoundScore(competitor, round) {
+  if (!competitor || !competitor.linescores) return '--';
+  const roundData = competitor.linescores.find(ls => ls.period === round);
+  if (!roundData) return '--';
+  return roundData.displayValue || '--';
+}
+
+function isCut(competitor) {
+  if (!cutHappened) return false;
+  if (!competitor) return true;
+  if (!competitor.linescores) return true;
+  const hasR3 = competitor.linescores.some(ls => ls.period === 3);
+  if (!hasR3) return true;
+  const status = competitor.status;
+  if (status && status.type && (status.type.name === 'STATUS_CUT' || status.type.description === 'Cut')) return true;
+  return false;
+}
+
+function getPosition(competitor) {
+  if (!competitor) return '--';
+  if (competitor.status && competitor.status.position && competitor.status.position.displayName) {
+    return competitor.status.position.displayName;
+  }
+  if (competitor.order) {
+    return competitor.isTied ? 'T' + competitor.order : String(competitor.order);
+  }
+  return '--';
+}
+
+async function fetchData() {
   try {
     const resp = await fetch(ESPN_URL);
     if (!resp.ok) throw new Error('ESPN API returned ' + resp.status);
     const data = await resp.json();
-    lastData = data;
-    document.getElementById('error-banner').style.display = 'none';
-    return data;
-  } catch (e) {
-    console.error('Fetch failed:', e);
-    document.getElementById('error-banner').textContent = 'Unable to refresh data. Showing last known scores.';
-    document.getElementById('error-banner').style.display = 'block';
-    return lastData;
+    espnData = data;
+
+    const event = data.events && data.events[0];
+    if (!event) {
+      document.getElementById('statusLine').innerHTML = 'No active tournament found';
+      renderNoTournament();
+      return;
+    }
+
+    const comp = event.competitions && event.competitions[0];
+    if (!comp) return;
+
+    const competitors = comp.competitors || [];
+    buildCompetitorMap(competitors);
+    currentRound = detectCurrentRound(competitors);
+    cutHappened = currentRound >= 3;
+
+    const statusDetail = comp.status && comp.status.type ? comp.status.type.detail || '' : '';
+    const eventName = event.name || 'The Open Championship';
+
+    lastUpdate = new Date();
+    const timeStr = lastUpdate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('statusLine').innerHTML =
+      '<span class="live-dot"></span> ' + eventName + ' &middot; ' + statusDetail + ' &middot; Updated ' + timeStr;
+
+    renderStandings(competitors);
+    renderLeaderboard(competitors);
+    renderOwnership(competitors);
+
+  } catch (err) {
+    console.error('Fetch error:', err);
+    document.getElementById('statusLine').textContent = 'Error loading data. Retrying in 60s...';
+    if (!lastUpdate) {
+      renderStandings([]);
+      renderLeaderboard([]);
+      renderOwnership([]);
+    }
   }
 }
 
-function processESPNData(data) {
-  if (!data || !data.events || !data.events.length) return;
-  const event = data.events[0];
-  const comp = event.competitions[0];
-  const competitors = comp.competitors;
-  const currentRound = detectCurrentRound(competitors);
-  document.getElementById('tourney-subtitle').textContent = comp.status.type.detail;
-  const normalizedMap = {};
-  const allGolfers = [];
-  for (const c of competitors) {
-    const name = c.athlete.fullName;
-    const score = parseScore(c.score);
-    const ls = c.linescores || [];
-    const currentRoundLS = ls.find(l => l.period === currentRound);
-    const holesPlayed = currentRoundLS && currentRoundLS.linescores ? currentRoundLS.linescores.length : 0;
-    const currentRoundHasValue = currentRoundLS && currentRoundLS.value != null;
-    let thru = '-';
-    if (currentRoundHasValue && holesPlayed === 18) thru = 'F';
-    else if (holesPlayed > 0) thru = '' + holesPlayed;
-    let today = '-';
-    if (currentRoundLS && currentRoundLS.displayValue) today = currentRoundLS.displayValue;
-    const rounds = [];
-    for (let r = 1; r <= 4; r++) { const rls = ls.find(l => l.period === r); rounds.push(rls && rls.value != null ? rls.value : null); }
-    const cutMade = isCutMade(c, currentRound);
-    const golfer = { name, score, order: c.order, thru, today, rounds, status: cutMade ? 'active' : 'cut', currentRound };
-    golferMap[name] = golfer;
-    normalizedMap[normalizeName(name)] = golfer;
-    allGolfers.push(golfer);
-  }
-  return { allGolfers, normalizedMap, currentRound };
+function renderNoTournament() {
+  const el = document.getElementById('tab-standings');
+  el.innerHTML = '<div class="no-tournament"><h3>No Active Tournament</h3><p>The Open Championship data will appear here when the tournament begins.</p><p style="margin-top:12px;color:var(--text-muted);font-size:0.85em;">The pool standings and leaderboard will automatically refresh when data becomes available.</p></div>';
 }
 
-function calculateStandings(normalizedMap) {
-  const standings = PICKS.map(participant => {
-    const golfers = participant.picks.map((pickName, i) => {
-      const norm = normalizeName(pickName);
-      const g = normalizedMap[norm];
-      return { name: pickName, tier: participant.tiers[i], score: g ? g.score : null, thru: g ? g.thru : '-', today: g ? g.today : '-', position: g ? g.order : null, status: g ? g.status : 'unknown', found: !!g };
+function calculateStandings(competitors) {
+  return PICKS.map(entry => {
+    const golferResults = entry.picks.map((golferName, i) => {
+      const comp = findCompetitor(golferName);
+      const score = comp ? parseScore(comp.score) : null;
+      const cut = comp ? isCut(comp) : (cutHappened ? true : false);
+      const pos = comp ? getPosition(comp) : '--';
+      const thru = comp ? getThru(comp) : '--';
+      const today = comp ? getToday(comp) : '--';
+      const fullName = comp ? (comp.athlete ? comp.athlete.displayName || comp.athlete.fullName : golferName) : golferName;
+      return {
+        name: golferName,
+        displayName: fullName,
+        tier: entry.tiers[i],
+        score: score,
+        isCut: cut,
+        position: pos,
+        thru: thru,
+        today: today,
+        counting: false
+      };
     });
-    const scoringGolfers = golfers.filter(g => g.found && g.status !== 'cut' && g.score != null);
-    scoringGolfers.sort((a, b) => a.score - b.score);
-    const best4 = scoringGolfers.slice(0, 4);
-    const best4Names = new Set(best4.map(g => g.name));
-    const isDQ = scoringGolfers.length < 4;
-    const aggregate = isDQ ? null : best4.reduce((sum, g) => sum + g.score, 0);
-    golfers.forEach(g => { g.counting = best4Names.has(g.name); });
-    return { name: participant.name, tiebreaker: participant.tiebreaker, aggregate, isDQ, golfers, best4Display: isDQ ? 'DQ' : best4.map(g => formatScore(g.score)).join(', ') };
+
+    const active = golferResults.filter(g => !g.isCut && g.score !== null);
+    const pending = golferResults.filter(g => !g.isCut && g.score === null);
+    const isDQ = cutHappened && (active.length + pending.length) < 4;
+
+    let aggregate = null;
+    if (!isDQ) {
+      const scored = golferResults.filter(g => !g.isCut && g.score !== null);
+      scored.sort((a, b) => a.score - b.score);
+      const counting = scored.slice(0, 4);
+      counting.forEach(g => g.counting = true);
+
+      if (counting.length > 0) {
+        aggregate = counting.reduce((sum, g) => sum + g.score, 0);
+      }
+      if (!cutHappened && counting.length < 4) {
+        // Before cut, if we don't have 4 scores yet, still sum what we have
+      }
+    }
+
+    return {
+      name: entry.name,
+      tiebreaker: entry.tiebreaker,
+      golfers: golferResults,
+      aggregate: aggregate,
+      isDQ: isDQ,
+      activePicks: active.length + pending.length
+    };
   });
+}
+
+function renderStandings(competitors) {
+  const standings = calculateStandings(competitors);
+
   standings.sort((a, b) => {
     if (a.isDQ && !b.isDQ) return 1;
     if (!a.isDQ && b.isDQ) return -1;
     if (a.isDQ && b.isDQ) return 0;
+    if (a.aggregate === null && b.aggregate === null) return 0;
+    if (a.aggregate === null) return 1;
+    if (b.aggregate === null) return -1;
     if (a.aggregate !== b.aggregate) return a.aggregate - b.aggregate;
     return a.tiebreaker - b.tiebreaker;
   });
-  let rank = 1;
-  for (let i = 0; i < standings.length; i++) {
-    if (standings[i].isDQ) { standings[i].rank = 'DQ'; continue; }
-    if (i > 0 && !standings[i-1].isDQ && standings[i].aggregate === standings[i-1].aggregate) standings[i].rank = standings[i-1].rank;
-    else standings[i].rank = rank;
-    rank = i + 2;
-  }
-  return standings;
+
+  let rank = 0;
+  let lastScore = null;
+  let lastTB = null;
+  standings.forEach((s, i) => {
+    if (s.isDQ) {
+      s.rank = '--';
+    } else {
+      if (s.aggregate !== lastScore || s.tiebreaker !== lastTB) {
+        rank = i + 1;
+      }
+      s.rank = rank;
+      lastScore = s.aggregate;
+      lastTB = s.tiebreaker;
+    }
+  });
+
+  const container = document.getElementById('tab-standings');
+  let html = '<div class="hint-text">Click on any row to expand picks. Click a golfer name to learn more.</div>';
+  html += '<table><thead><tr>';
+  html += '<th class="center" style="width:40px">#</th>';
+  html += '<th>Participant</th>';
+  html += '<th class="center">Score</th>';
+  html += '<th class="center hide-mobile">TB</th>';
+  html += '<th class="center hide-mobile">Active</th>';
+  html += '</tr></thead><tbody>';
+
+  standings.forEach((s, idx) => {
+    const rowId = 'row-' + idx;
+    const isExpanded = expandedRows.has(s.name);
+    const scoreVal = s.isDQ ? 'DQ' : formatScore(s.aggregate);
+    const sc = s.isDQ ? '' : scoreClass(s.aggregate);
+    const dqClass = s.isDQ ? ' dq-row' : '';
+
+    html += '<tr class="standings-row' + dqClass + '" onclick="toggleRow(\'' + s.name.replace(/'/g, "\\'") + '\',' + idx + ')">';
+    html += '<td class="rank-cell">' + s.rank + '</td>';
+    html += '<td class="name-cell"><span class="expand-icon' + (isExpanded ? ' open' : '') + '">&#9654;</span>' + escapeHtml(s.name) + (s.isDQ ? '<span class="dq-badge">DQ</span>' : '') + '</td>';
+    html += '<td class="center score-cell ' + sc + '">' + scoreVal + '</td>';
+    html += '<td class="center tiebreaker-cell hide-mobile">' + formatScore(s.tiebreaker) + '</td>';
+    html += '<td class="center hide-mobile">' + s.activePicks + '/6</td>';
+    html += '</tr>';
+
+    html += '<tr class="detail-row' + (isExpanded ? ' open' : '') + '" id="detail-' + idx + '">';
+    html += '<td class="detail-cell" colspan="5"><div class="picks-grid">';
+    s.golfers.forEach(g => {
+      const cardClass = g.counting ? ' counting' : (g.isCut ? ' cut' : '');
+      html += '<div class="pick-card' + cardClass + '">';
+      html += '<div><span class="pick-name" onclick="event.stopPropagation();showPlayerModal(\'' + g.name.replace(/'/g, "\\'") + '\')">' + escapeHtml(g.name) + '</span>';
+      html += '<br><span class="pick-tier">' + g.tier + '</span>';
+      if (g.counting) html += ' <span class="counting-badge">COUNTING</span>';
+      if (g.isCut) html += ' <span class="cut-badge">CUT</span>';
+      html += '</div>';
+      html += '<div style="text-align:right">';
+      html += '<span class="pick-score ' + scoreClass(g.score) + '">' + formatScore(g.score) + '</span>';
+      html += '<br><span class="pick-status">' + g.position + ' &middot; Thru ' + g.thru + '</span>';
+      if (g.today !== '--') html += '<br><span class="pick-status">Today: ' + g.today + '</span>';
+      html += '</div></div>';
+    });
+    html += '</div></td></tr>';
+  });
+
+  html += '</tbody></table>';
+  html += '<div class="last-updated">' + (lastUpdate ? 'Last updated: ' + lastUpdate.toLocaleTimeString() + ' &middot; Auto-refreshes every 60s' : '') + '</div>';
+  container.innerHTML = html;
 }
 
+function renderLeaderboard(competitors) {
+  if (!competitors) competitors = [];
+  const sorted = [...competitors].sort((a, b) => (a.order || 999) - (b.order || 999));
 
-function openPlayerModal(golferName) {
-  const info = PLAYER_DATA[golferName];
-  const g = golferMap[golferName];
-  const overlay = document.getElementById('modal-overlay');
-  document.getElementById('modal-name').textContent = golferName;
-  if (!info) {
-    document.getElementById('modal-meta').textContent = '';
-    document.getElementById('modal-score').className = 'player-score';
-    document.getElementById('modal-score').textContent = g ? formatScore(g.score) : '-';
-    document.getElementById('modal-body').innerHTML = '<p style="padding:20px;color:var(--text-gray);font-style:italic">No detailed player data available.</p>';
-    overlay.classList.add('open');
-    return;
-  }
-  document.getElementById('modal-meta').textContent = `${info.country} · Age ${info.age || '?'} · ${info.hometown}`;
-  const sc = g ? g.score : null;
-  const scoreEl = document.getElementById('modal-score');
-  scoreEl.textContent = formatScore(sc);
-  scoreEl.className = 'player-score ' + scoreClass(sc);
+  const container = document.getElementById('tab-leaderboard');
+  let html = '<table class="leaderboard-table"><thead><tr>';
+  html += '<th class="center" style="width:50px">Pos</th>';
+  html += '<th>Player</th>';
+  html += '<th class="center">Score</th>';
+  html += '<th class="center hide-mobile">R1</th>';
+  html += '<th class="center hide-mobile">R2</th>';
+  html += '<th class="center hide-mobile">R3</th>';
+  html += '<th class="center hide-mobile">R4</th>';
+  html += '<th class="center">Thru</th>';
+  html += '<th class="center">Today</th>';
+  html += '</tr></thead><tbody>';
 
-  let html = '';
+  sorted.forEach(c => {
+    const name = c.athlete ? c.athlete.displayName || c.athlete.fullName || 'Unknown' : 'Unknown';
+    const score = parseScore(c.score);
+    const pos = getPosition(c);
+    const thru = getThru(c);
+    const today = getToday(c);
+    const cutClass = isCut(c) ? ' dq-row' : '';
+    const r1 = getRoundScore(c, 1);
+    const r2 = getRoundScore(c, 2);
+    const r3 = getRoundScore(c, 3);
+    const r4 = getRoundScore(c, 4);
 
-  if (info.sgData) {
-    const sgCard = (val, label, rank) => {
-      const sign = val > 0 ? '+' : '';
-      const isGood = rank <= 50;
-      const rColor = isGood ? '#006400' : 'var(--red)';
-      const valColor = val > 0 ? '#006400' : val < 0 ? 'var(--red)' : 'var(--text-gray)';
-      return `<div class="stat-card"><div class="stat-value" style="color:${valColor}">${sign}${val.toFixed(2)}</div><div style="font-size:0.7em;color:${rColor};font-weight:700;margin-top:2px">(#${rank} on Tour)</div><div class="stat-label">${label}</div></div>`;
-    };
-    html += `<div class="modal-section"><h3>Strokes Gained (2025-26 Season)</h3><p style="font-size:0.75em;color:var(--text-gray);margin-bottom:8px">Source: PGA Tour official statistics</p><div class="stat-grid">
-      ${sgCard(info.sgData.total, 'Total', info.sgData.totalR)}
-      ${sgCard(info.sgData.offTee, 'Off the Tee', info.sgData.offTeeR)}
-      ${sgCard(info.sgData.approach, 'Approach', info.sgData.approachR)}
-      ${sgCard(info.sgData.aroundGreen, 'Around Green', info.sgData.aroundGreenR)}
-      ${sgCard(info.sgData.putting, 'Putting', info.sgData.puttingR)}
-    </div></div>`;
-  } else if (info && !info.sgData) {
-    html += `<div class="modal-section"><h3>Strokes Gained (2025-26 Season)</h3><p style="font-size:0.85em;color:var(--text-gray);font-style:italic">LIV Golf player — PGA Tour strokes gained stats not available.</p></div>`;
-  }
+    html += '<tr class="' + cutClass + '" style="cursor:pointer" onclick="showPlayerModal(\'' + name.replace(/'/g, "\\'") + '\')">';
+    html += '<td class="pos-cell">' + pos + '</td>';
+    html += '<td class="name-cell">' + escapeHtml(name) + (isCut(c) ? '<span class="dq-badge" style="font-size:0.65em">CUT</span>' : '') + '</td>';
+    html += '<td class="center score-cell ' + scoreClass(score) + '">' + formatScore(score) + '</td>';
+    html += '<td class="center hide-mobile">' + r1 + '</td>';
+    html += '<td class="center hide-mobile">' + r2 + '</td>';
+    html += '<td class="center hide-mobile">' + r3 + '</td>';
+    html += '<td class="center hide-mobile">' + r4 + '</td>';
+    html += '<td class="center thru-cell">' + thru + '</td>';
+    html += '<td class="center ' + scoreClass(parseScore(today)) + '">' + today + '</td>';
+    html += '</tr>';
+  });
 
-  html += `<div class="modal-section"><h3>Career Highlights</h3><div class="stat-grid">
-    <div class="stat-card"><div class="stat-value" style="font-size:1em">${info.topFinishes}</div><div class="stat-label">Wins</div></div>
-    <div class="stat-card"><div class="stat-value">${info.turnedPro || 'Amateur'}</div><div class="stat-label">Turned Pro</div></div>
-    <div class="stat-card"><div class="stat-value" style="font-size:0.9em">${info.college || 'N/A'}</div><div class="stat-label">College</div></div>
-  </div></div>`;
+  html += '</tbody></table>';
+  html += '<div class="last-updated">' + (lastUpdate ? 'Last updated: ' + lastUpdate.toLocaleTimeString() : '') + '</div>';
+  container.innerHTML = html;
+}
 
-  if (info.usOpenHistory && info.usOpenHistory.length > 0) {
-    html += `<div class="modal-section"><h3>U.S. Open History</h3><table class="us-open-history-table"><thead><tr><th>Year</th><th>Finish</th></tr></thead><tbody>`;
-    info.usOpenHistory.forEach(h => {
-      const isWin = h.finish === 'Won';
-      html += `<tr><td>${h.year}</td><td style="${isWin ? 'font-weight:800;color:var(--navy)' : ''}">${h.finish}</td></tr>`;
+function renderOwnership(competitors) {
+  const ownerMap = {};
+  PICKS.forEach(entry => {
+    entry.picks.forEach(golfer => {
+      const norm = normalizeName(golfer);
+      if (!ownerMap[norm]) ownerMap[norm] = { name: golfer, owners: [], count: 0 };
+      ownerMap[norm].owners.push(entry.name);
+      ownerMap[norm].count++;
     });
-    html += '</tbody></table></div>';
+  });
+
+  const ownerList = Object.values(ownerMap);
+  ownerList.sort((a, b) => b.count - a.count);
+
+  const totalEntries = PICKS.length;
+  const container = document.getElementById('tab-ownership');
+  let html = '<table class="ownership-table"><thead><tr>';
+  html += '<th>Golfer</th>';
+  html += '<th class="center">Owned</th>';
+  html += '<th class="center">Score</th>';
+  html += '<th class="hide-mobile">Picked By</th>';
+  html += '</tr></thead><tbody>';
+
+  ownerList.forEach(o => {
+    const comp = findCompetitor(o.name);
+    const score = comp ? parseScore(comp.score) : null;
+    const pct = ((o.count / totalEntries) * 100).toFixed(0);
+    const barWidth = Math.round((o.count / totalEntries) * 80);
+
+    html += '<tr style="cursor:pointer" onclick="showPlayerModal(\'' + o.name.replace(/'/g, "\\'") + '\')">';
+    html += '<td class="name-cell">' + escapeHtml(o.name) + '</td>';
+    html += '<td class="center">' + pct + '% (' + o.count + '/' + totalEntries + ')<span class="pct-bar" style="width:' + barWidth + 'px"></span></td>';
+    html += '<td class="center score-cell ' + scoreClass(score) + '">' + formatScore(score) + '</td>';
+    html += '<td class="picked-by-list hide-mobile">' + o.owners.map(escapeHtml).join(', ') + '</td>';
+    html += '</tr>';
+  });
+
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+function showPlayerModal(golferName) {
+  const normInput = normalizeName(golferName);
+
+  let playerKey = null;
+  for (const key of Object.keys(PLAYER_DATA)) {
+    if (normalizeName(key) === normInput) {
+      playerKey = key;
+      break;
+    }
   }
 
-  if (info.funFacts && info.funFacts.length > 0) {
-    html += `<div class="modal-section"><h3>Fun Facts</h3><ul class="fact-list">`;
-    info.funFacts.forEach(f => { html += `<li>${f}</li>`; });
+  const player = playerKey ? PLAYER_DATA[playerKey] : null;
+  const comp = findCompetitor(golferName);
+  const score = comp ? parseScore(comp.score) : null;
+  const pos = comp ? getPosition(comp) : '--';
+  const displayName = playerKey || golferName;
+
+  let html = '<div class="modal-header">';
+  html += '<button class="modal-close" onclick="closeModal()">&times;</button>';
+  html += '<div class="modal-header-left">';
+  html += '<h2>' + escapeHtml(displayName) + '</h2>';
+  if (player) html += '<div class="modal-country">' + player.country + '</div>';
+  html += '</div>';
+  html += '<div class="modal-score ' + scoreClass(score) + '">' + formatScore(score) + '</div>';
+  html += '</div>';
+  html += '<div class="modal-body">';
+
+  if (player) {
+    // Bio
+    html += '<div class="modal-section"><h3>Player Info</h3><div class="modal-bio">';
+    html += '<div><span class="bio-label">Age</span><br><span class="bio-value">' + player.age + '</span></div>';
+    html += '<div><span class="bio-label">Hometown</span><br><span class="bio-value">' + escapeHtml(player.hometown) + '</span></div>';
+    html += '<div><span class="bio-label">Turned Pro</span><br><span class="bio-value">' + player.turnedPro + '</span></div>';
+    html += '<div><span class="bio-label">College</span><br><span class="bio-value">' + escapeHtml(player.college) + '</span></div>';
+    html += '</div></div>';
+
+    // Strokes Gained
+    html += '<div class="modal-section"><h3>Strokes Gained Statistics</h3>';
+    if (player.sgData) {
+      const sg = player.sgData;
+      html += '<div class="sg-grid">';
+      const cats = [
+        { label: 'Total', val: sg.total, rank: sg.totalR },
+        { label: 'Off Tee', val: sg.offTee, rank: sg.offTeeR },
+        { label: 'Approach', val: sg.approach, rank: sg.approachR },
+        { label: 'Around Green', val: sg.aroundGreen, rank: sg.aroundGreenR },
+        { label: 'Putting', val: sg.putting, rank: sg.puttingR }
+      ];
+      cats.forEach(c => {
+        const valClass = c.val >= 0 ? 'positive' : 'negative';
+        const rankClass = c.rank <= 50 ? 'good' : 'bad';
+        html += '<div class="sg-item">';
+        html += '<div class="sg-label">' + c.label + '</div>';
+        html += '<div class="sg-value ' + valClass + '">' + (c.val >= 0 ? '+' : '') + c.val.toFixed(3) + '</div>';
+        html += '<div class="sg-rank ' + rankClass + '">(#' + c.rank + ' on Tour)</div>';
+        html += '</div>';
+      });
+      html += '</div>';
+      html += '<div class="sg-source">Source: PGA Tour official statistics</div>';
+    } else {
+      const reason = player.noSgReason || 'PGA Tour strokes gained stats not available for this player.';
+      html += '<div class="sg-unavailable">' + escapeHtml(reason) + '</div>';
+    }
+    html += '</div>';
+
+    // Career Highlights
+    html += '<div class="modal-section"><h3>Career Highlights</h3>';
+    html += '<p class="top-finishes-text">' + escapeHtml(player.topFinishes) + '</p>';
+    html += '</div>';
+
+    // Open Championship History
+    html += '<div class="modal-section"><h3>Open Championship History</h3>';
+    if (player.openHistory && player.openHistory.length > 0) {
+      html += '<div class="open-history-grid">';
+      player.openHistory.forEach(h => {
+        const isWinner = h.finish === 'Won';
+        html += '<div class="open-year-chip' + (isWinner ? ' winner' : '') + '">';
+        html += '<span class="yr">' + h.year + '</span><span class="fin">' + h.finish + '</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+    } else {
+      html += '<p style="color:var(--text-muted);font-style:italic;font-size:0.88em;">No previous Open Championship appearances on record.</p>';
+    }
+    html += '</div>';
+
+    // Fun Facts
+    html += '<div class="modal-section"><h3>Fun Facts</h3><ul class="fun-facts-list">';
+    player.funFacts.forEach(f => {
+      html += '<li>' + escapeHtml(f) + '</li>';
+    });
     html += '</ul></div>';
+  } else {
+    html += '<div style="padding:20px;text-align:center;color:var(--text-muted);">';
+    html += '<p>Detailed player information not available.</p>';
+    if (comp) {
+      html += '<p style="margin-top:8px;">Position: ' + pos + '</p>';
+    }
+    html += '</div>';
   }
 
-  document.getElementById('modal-body').innerHTML = html;
-  overlay.classList.add('open');
+  html += '</div>';
+
+  document.getElementById('modalCard').innerHTML = html;
+  document.getElementById('playerModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
-document.getElementById('modal-close').addEventListener('click', () => document.getElementById('modal-overlay').classList.remove('open'));
-document.getElementById('modal-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('open'); });
+function closeModal() {
+  document.getElementById('playerModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
-function renderPoolStandings(standings) {
-  const tbody = document.getElementById('pool-body');
-  tbody.innerHTML = '';
-  standings.forEach(p => {
-    const tr = document.createElement('tr');
-    tr.className = 'pool-row' + (p.isDQ ? ' dq-row' : '') + (expandedRows.has(p.name) ? ' expanded' : '');
-    const rc = p.rank === 1 ? ' rank-1' : p.rank === 2 ? ' rank-2' : p.rank === 3 ? ' rank-3' : '';
-    tr.innerHTML = `<td class="${rc}">${p.isDQ ? '-' : p.rank}</td><td class="name"><span class="expand-icon">&#9654;</span>${p.name}</td><td class="score ${p.isDQ ? '' : scoreClass(p.aggregate)}">${p.isDQ ? 'DQ' : formatScore(p.aggregate)}</td><td class="center" style="font-size:0.8em;color:var(--text-gray)">${p.best4Display}</td><td class="center hide-mobile" style="font-size:0.8em">${p.tiebreaker}</td>`;
-    const detailTr = document.createElement('tr');
-    detailTr.className = 'detail-row' + (expandedRows.has(p.name) ? ' open' : '');
-    const detailTd = document.createElement('td');
-    detailTd.colSpan = 5;
-    let ph = `<table class="picks-table"><thead><tr><th>TIER</th><th>GOLFER</th><th class="center">POS</th><th class="center">SCORE</th><th class="center">THRU</th><th class="center">TODAY</th><th class="center">STATUS</th></tr></thead><tbody>`;
-    p.golfers.forEach(g => {
-      const cls = g.counting ? 'counting' : (g.status === 'cut' ? '' : 'not-counting');
-      const st = g.status === 'cut' ? '<span class="cut-indicator">CUT</span>' : !g.found ? '<span class="cut-indicator">N/A</span>' : g.counting ? '<span class="counting-badge">Counting</span>' : '';
-      ph += `<tr class="${cls}"><td>${g.tier}</td><td><span class="golfer-name-link" data-golfer="${g.name}">${g.name}</span></td><td class="center">${g.position || '-'}</td><td class="center ${scoreClass(g.score)}">${formatScore(g.score)}</td><td class="center">${g.thru}</td><td class="center ${scoreClass(parseScore(g.today))}">${g.today}</td><td class="center">${st}</td></tr>`;
-    });
-    ph += '</tbody></table>';
-    detailTd.innerHTML = ph;
-    detailTr.appendChild(detailTd);
-    detailTd.querySelectorAll('.golfer-name-link').forEach(el => {
-      el.addEventListener('click', e => { e.stopPropagation(); openPlayerModal(el.dataset.golfer); });
-    });
-    tr.addEventListener('click', () => {
-      const isOpen = detailTr.classList.contains('open');
-      if (isOpen) { detailTr.classList.remove('open'); tr.classList.remove('expanded'); expandedRows.delete(p.name); }
-      else { detailTr.classList.add('open'); tr.classList.add('expanded'); expandedRows.add(p.name); }
-    });
-    tbody.appendChild(tr);
-    tbody.appendChild(detailTr);
+function toggleRow(name, idx) {
+  if (expandedRows.has(name)) {
+    expandedRows.delete(name);
+  } else {
+    expandedRows.add(name);
+  }
+  const detail = document.getElementById('detail-' + idx);
+  if (detail) detail.classList.toggle('open');
+  const row = detail ? detail.previousElementSibling : null;
+  if (row) {
+    const icon = row.querySelector('.expand-icon');
+    if (icon) icon.classList.toggle('open');
+  }
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(el => {
+    if (el.textContent.toLowerCase().includes(tab === 'standings' ? 'pool' : tab === 'sg' ? 'sg' : tab)) {
+      el.classList.add('active');
+    }
   });
-  document.getElementById('pool-loading').style.display = 'none';
-  document.getElementById('pool-table').style.display = '';
+  // Fix tab activation
+  const tabMap = { standings: 0, leaderboard: 1, ownership: 2, sg: 3 };
+  const btns = document.querySelectorAll('.tab-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  if (btns[tabMap[tab]]) btns[tabMap[tab]].classList.add('active');
 }
 
-function renderTournamentLeaderboard(allGolfers) {
-  const tbody = document.getElementById('tourney-body');
-  tbody.innerHTML = '';
-  allGolfers.sort((a, b) => a.order - b.order);
-  allGolfers.forEach((g, i) => {
-    const tiedCount = allGolfers.filter(x => x.score === g.score).length;
-    const tiedStart = allGolfers.findIndex(x => x.score === g.score);
-    let displayPos = tiedCount > 1 ? 'T' + (tiedStart + 1) : '' + (tiedStart + 1);
-    if (g.status === 'cut') displayPos = 'CUT';
-    const tr = document.createElement('tr');
-    tr.className = 'tourney-row';
-    tr.innerHTML = `<td class="center">${displayPos}</td><td><span class="golfer-name-link" data-golfer="${g.name}">${g.name}</span></td><td class="center ${scoreClass(g.score)}" style="font-weight:700">${formatScore(g.score)}</td><td class="center">${g.thru}</td><td class="center ${scoreClass(parseScore(g.today))}">${g.today}</td><td class="center hide-mobile">${g.rounds[0] || '-'}</td><td class="center hide-mobile">${g.rounds[1] || '-'}</td><td class="center hide-mobile">${g.rounds[2] || '-'}</td><td class="center hide-mobile">${g.rounds[3] || '-'}</td>`;
-    tr.querySelector('.golfer-name-link').addEventListener('click', e => { e.stopPropagation(); openPlayerModal(g.name); });
-    tbody.appendChild(tr);
-  });
+function escapeHtml(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
 }
 
-function renderOwnership(normalizedMap) {
-  const oc = {}, ob = {};
-  const total = PICKS.length;
-  PICKS.forEach(p => { p.picks.forEach(gn => { const k = normalizeName(gn); if (!oc[k]) { oc[k] = 0; ob[k] = []; } oc[k]++; ob[k].push(p.name); }); });
-  const rows = Object.keys(oc).map(key => {
-    const g = normalizedMap[key];
-    return { displayName: g ? g.name : key, score: g ? g.score : null, count: oc[key], pct: Math.round((oc[key] / total) * 100), pickedBy: ob[key].join(', ') };
-  }).sort((a, b) => b.count - a.count || a.displayName.localeCompare(b.displayName));
-  const tbody = document.getElementById('ownership-body');
-  tbody.innerHTML = '';
-  rows.forEach(r => {
-    const tr = document.createElement('tr');
-    tr.className = 'tourney-row';
-    tr.innerHTML = `<td><span class="golfer-name-link" data-golfer="${r.displayName}" style="font-weight:600">${r.displayName}</span></td><td class="center ${scoreClass(r.score)}" style="font-weight:700">${formatScore(r.score)}</td><td class="center">${r.count} / ${total}</td><td class="center">${r.pct}%<div class="ownership-bar" style="width:${r.pct}%"></div></td><td class="hide-mobile" style="font-size:0.8em;color:var(--text-gray)">${r.pickedBy}</td>`;
-    tr.querySelector('.golfer-name-link').addEventListener('click', e => { e.stopPropagation(); openPlayerModal(r.displayName); });
-    tbody.appendChild(tr);
-  });
-}
-
-async function refresh() {
-  const data = await fetchLeaderboard();
-  if (!data) return;
-  const result = processESPNData(data);
-  if (!result) return;
-  const standings = calculateStandings(result.normalizedMap);
-  renderPoolStandings(standings);
-  renderTournamentLeaderboard(result.allGolfers);
-  renderOwnership(result.normalizedMap);
-  document.getElementById('last-updated').textContent = 'Last updated: ' + new Date().toLocaleTimeString();
-}
-
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(btn.dataset.tab + '-tab').classList.add('active');
-  });
+// Keyboard close for modal
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
 });
 
-refresh();
-setInterval(refresh, 60000);
+// Init
+fetchData();
+refreshInterval = setInterval(fetchData, 60000);
 </script>
 </body>
 </html>
